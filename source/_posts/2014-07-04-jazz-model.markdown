@@ -1,30 +1,10 @@
 ---
 layout: post
-title: "First Post"
+title: "Jazz Model"
 date: 2014-07-04 17:13:09 -0400
 comments: true
 categories: 
 ---
-
-###Why the eternal white belt, you ask?
-
-Without getting overly philosophical, I think it's really all about leaving your ego at the door and being ready to learn like a beginner. The white belt is a powerful tool - it allows you to know that you're not stupid, not completely incompetent, but acknowledge you may know nothing about a particular discipline. Yet. And that's completely ok. It helps keep things fresh; I think the best default state is to be learning.
-
-<!-- More -->
-
-Here's a quote from _Mastery_, a fantastic book by George Leonard. He closes his work with a story of Jigoro Kana, the man who both invented Judo and started the practice of wearing black and white belts in martial arts. He, perhaps more than anyone else, would understand the symbolic importance of the novice’s white belt:
-
->When [he] was quite old and close to death, the story goes, he called his students around him and told them we wanted to be buried in his white belt. What a touching story; how humble of the world’s highest-ranking judoist in his last days to ask for the emblem of a beginner! But Kano’s request, I eventually realized, was less humility than realism. At the moment of death, the ultimate transformation, we are all white belts. And if death makes beginners of us, so does life — again and again. In the master’s secret mirror, even at the moment of highest renown and accomplishment, there is an image of the newest student in the class, eager for knowledge, willing to play the fool.
-
-Anyway, that's kinda cool.
-
-And now:
-
-
-->_"Get Jazzy On Me"_ - Jason Derulo <-
-
-##Jazz Model
-
 So we've been learning about ActiveRecord here at Flatiron School, and how it's a really awesome ORM that makes things much easier for us in developing applications. I've also known for a while that there is a connection between music theory and programming, especially with Python, and I wondered if there were a way to combine it with Ruby.
 
 Jazz Model is an ActiveRecord model of concepts in Jazz theory, establishing relationships between chords and scales, and much more.
@@ -141,4 +121,4 @@ Anyway, I think this could be a fun open-source project to contribute to.
 
 Cheers,
 
-Will
+W
