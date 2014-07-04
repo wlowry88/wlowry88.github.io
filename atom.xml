@@ -4,7 +4,7 @@
   <title><![CDATA[Eternal White Belt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-07-04T18:18:05-04:00</updated>
+  <updated>2014-07-04T18:38:58-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -14,30 +14,36 @@
 
   
   <entry>
-    <title type="html"><![CDATA[First Post]]></title>
-    <link href="http://wlowry88.github.io/blog/2014/07/04/first-post/"/>
-    <updated>2014-07-04T17:13:09-04:00</updated>
-    <id>http://wlowry88.github.io/blog/2014/07/04/first-post</id>
-    <content type="html"><![CDATA[<h3>Why the eternal white belt, you ask?</h3>
+    <title type="html"><![CDATA[The Eternal Whitebelt?]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/07/04/White%20Belt/"/>
+    <updated>2014-07-04T18:28:24-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/07/04/White Belt</id>
+    <content type="html"><![CDATA[<h3>Inspiration</h3>
+
+<p>It&rsquo;s a rainy Fourth of July here in Needham, MA, the town in which I was initialized. It&rsquo;s a huge change of pace from NYC. It&rsquo;s pretty cool to be back and see my family. But it also got me thinking. I have been coding now every day for 5 weeks (I accidentally broke my streak on github because I didn&rsquo;t know committing to opened pull requests didn&rsquo;t count, argh >_&lt;), and I have begun to realize that I really enjoy this stuff. And I like it enough to do it professionally. But that also means that I have a really long way to go.</p>
+
+<h3>So, why the eternal white belt then? Don&rsquo;t you want to advance and improve?</h3>
 
 <p>Without getting overly philosophical, I think it&rsquo;s really all about leaving your ego at the door and being ready to learn like a beginner. The white belt is a powerful tool &ndash; it allows you to know that you&rsquo;re not stupid, not completely incompetent, but acknowledge you may know nothing about a particular discipline. Yet. And that&rsquo;s completely ok. It helps keep things fresh; I think the best default state is to be learning.</p>
 
-<!-- More -->
-
-
-<p>Here&rsquo;s a quote from <em>Mastery</em>, a fantastic book by George Leonard. He closes his work with a story of Jigoro Kana, the man who both invented Judo and started the practice of wearing black and white belts in martial arts. He, perhaps more than anyone else, would understand the symbolic importance of the novice’s white belt:</p>
-
 <blockquote><p>When [he] was quite old and close to death, the story goes, he called his students around him and told them we wanted to be buried in his white belt. What a touching story; how humble of the world’s highest-ranking judoist in his last days to ask for the emblem of a beginner! But Kano’s request, I eventually realized, was less humility than realism. At the moment of death, the ultimate transformation, we are all white belts. And if death makes beginners of us, so does life — again and again. In the master’s secret mirror, even at the moment of highest renown and accomplishment, there is an image of the newest student in the class, eager for knowledge, willing to play the fool.</p></blockquote>
 
-<p>Anyway, that&rsquo;s kinda cool.</p>
+<p>I think this is a very important thing to keep in mind coming from a non-technical background and leaping into the Flatiron School program. A few of my fellow students have a little more experience than I do with computer science concepts; for instance, I had never seen recursion in a solution before our &ldquo;Binary Trees in Ruby&rdquo; lab the other day. It was hard for me, but once I saw it, it was beautiful.</p>
 
-<p>And now:</p>
+<p>Regardless of whether or not I become a black-belt in Ruby, or whether or not I&rsquo;ll be able to understand procs and lambdas and metaprogramming or build a rails app from scratch without assistance, I think that maintaining a proper beginner mindset will be crucial.</p>
 
-<p style="text-align:center;"><em>&ldquo;Get Jazzy On Me&rdquo;</em> &ndash; Jason Derulo</p>
+<p>Have a happy Fourth!</p>
 
-<h2>Jazz Model</h2>
-
-<p>So we&rsquo;ve been learning about ActiveRecord here at Flatiron School, and how it&rsquo;s a really awesome ORM that makes things much easier for us in developing applications. I&rsquo;ve also known for a while that there is a connection between music theory and programming, especially with Python, and I wondered if there were a way to combine it with Ruby.</p>
+<p>W</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jazz Model]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/07/04/jazz-model/"/>
+    <updated>2014-07-04T17:13:09-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/07/04/jazz-model</id>
+    <content type="html"><![CDATA[<p>So we&rsquo;ve been learning about ActiveRecord here at Flatiron School, and how it&rsquo;s a really awesome ORM that makes things much easier for us in developing applications. I&rsquo;ve also known for a while that there is a connection between music theory and programming, especially with Python, and I wondered if there were a way to combine it with Ruby.</p>
 
 <p>Jazz Model is an ActiveRecord model of concepts in Jazz theory, establishing relationships between chords and scales, and much more.</p>
 
@@ -232,7 +238,7 @@ All chord/scale/mode/etc. definitions are stored as a mathematical system (seque
 
 <p>Cheers,</p>
 
-<p>Will</p>
+<p>W</p>
 ]]></content>
   </entry>
   

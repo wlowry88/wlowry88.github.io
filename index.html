@@ -102,18 +102,262 @@ $(document).ready(
     <article class="post">
 	<h2 class="title">
 		
-		<a href="/blog/2014/07/04/first-post/">
+		<a href="/blog/2014/07/04/White%20Belt/">
 		
-			First Post</a>
+			The Eternal Whitebelt?</a>
 	</h2>
 	<div class="entry-content">
-		<h3>Why the eternal white belt, you ask?</h3>
+		<h3>Inspiration</h3>
+
+<p>It&rsquo;s a rainy Fourth of July here in Needham, MA, the town in which I was initialized. It&rsquo;s a huge change of pace from NYC. It&rsquo;s pretty cool to be back and see my family. But it also got me thinking. I have been coding now every day for 5 weeks (I accidentally broke my streak on github because I didn&rsquo;t know committing to opened pull requests didn&rsquo;t count, argh >_&lt;), and I have begun to realize that I really enjoy this stuff. And I like it enough to do it professionally. But that also means that I have a really long way to go.</p>
+
+<h3>So, why the eternal white belt then? Don&rsquo;t you want to advance and improve?</h3>
 
 <p>Without getting overly philosophical, I think it&rsquo;s really all about leaving your ego at the door and being ready to learn like a beginner. The white belt is a powerful tool &ndash; it allows you to know that you&rsquo;re not stupid, not completely incompetent, but acknowledge you may know nothing about a particular discipline. Yet. And that&rsquo;s completely ok. It helps keep things fresh; I think the best default state is to be learning.</p>
 
+<blockquote><p>When [he] was quite old and close to death, the story goes, he called his students around him and told them we wanted to be buried in his white belt. What a touching story; how humble of the world’s highest-ranking judoist in his last days to ask for the emblem of a beginner! But Kano’s request, I eventually realized, was less humility than realism. At the moment of death, the ultimate transformation, we are all white belts. And if death makes beginners of us, so does life — again and again. In the master’s secret mirror, even at the moment of highest renown and accomplishment, there is an image of the newest student in the class, eager for knowledge, willing to play the fool.</p></blockquote>
+
+<p>I think this is a very important thing to keep in mind coming from a non-technical background and leaping into the Flatiron School program. A few of my fellow students have a little more experience than I do with computer science concepts; for instance, I had never seen recursion in a solution before our &ldquo;Binary Trees in Ruby&rdquo; lab the other day. It was hard for me, but once I saw it, it was beautiful.</p>
+
+<p>Regardless of whether or not I become a black-belt in Ruby, or whether or not I&rsquo;ll be able to understand procs and lambdas and metaprogramming or build a rails app from scratch without assistance, I think that maintaining a proper beginner mindset will be crucial.</p>
+
+<p>Have a happy Fourth!</p>
+
+<p>W</p>
 
 		
-		<a href="/blog/2014/07/04/first-post/" class="more-link">Read on &rarr;</a>
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-04T18:28:24-04:00" pubdate data-updated="true">Jul 4<sup>th</sup>, 2014</time></div>
+	
+
+
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/07/04/jazz-model/">
+		
+			Jazz Model</a>
+	</h2>
+	<div class="entry-content">
+		<p>So we&rsquo;ve been learning about ActiveRecord here at Flatiron School, and how it&rsquo;s a really awesome ORM that makes things much easier for us in developing applications. I&rsquo;ve also known for a while that there is a connection between music theory and programming, especially with Python, and I wondered if there were a way to combine it with Ruby.</p>
+
+<p>Jazz Model is an ActiveRecord model of concepts in Jazz theory, establishing relationships between chords and scales, and much more.</p>
+
+<p>The core of Jazz Toolbox is a full Ruby object model representing concepts of Jazz theory
+All chord/scale/mode/etc. definitions are stored as a mathematical system (sequences of numbers) which are then used to perform calculations.</p>
+
+<p>For example, putting some chord in a different key is a matter of adding an arbitrary delta of half-steps and doing modulo 12.</p>
+
+<h3>The Jazz Model Module</h3>
+
+<p>Their classes often inherit from their base Jazz Module.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">JazzModel</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Base</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">abstract_class</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">establish_connection</span> <span class="ss">:adapter</span> <span class="o">=&gt;</span> <span class="s2">&quot;sqlite3&quot;</span><span class="p">,</span> <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;:memory:&quot;</span>
+</span><span class='line'>    <span class="nb">load</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">),</span> <span class="s2">&quot;../../db/schema.rb&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">load_definitions</span><span class="p">(</span><span class="n">definition_name</span> <span class="o">=</span> <span class="ss">:default</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">definition</span> <span class="o">=</span> <span class="no">JazzModel</span><span class="o">::</span><span class="no">Definition</span><span class="o">[</span><span class="n">definition_name</span><span class="o">]</span>
+</span><span class='line'>      <span class="k">raise</span> <span class="no">ArgumentError</span><span class="p">,</span> <span class="s2">&quot;Definition </span><span class="si">#{</span><span class="n">definition_name</span><span class="si">}</span><span class="s2"> not found.&quot;</span> <span class="k">unless</span> <span class="n">definition</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">definition</span><span class="o">.</span><span class="n">load</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can see that the module inherits from ActiveRecord, and that it uses a sqlite3 adapter by default. However, we learned that ActiveRecord is relational database agnostic. Definitions are things like, chords, scales, etc. And here&rsquo;s an example of a class &ndash; the Chord class!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">Chord</span> <span class="o">&lt;</span> <span class="no">JazzModel</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>    <span class="kp">include</span> <span class="no">KeyContext</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">acts_as_tree</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">belongs_to</span> <span class="ss">:chord_quality</span> <span class="c1">#zOMG we learned this yesterday</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:symbols</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;ChordSymbol&#39;</span><span class="p">,</span> <span class="ss">:extend</span> <span class="o">=&gt;</span> <span class="no">ChordSymbolCollection</span>
+</span><span class='line'>    <span class="n">has_one</span> <span class="ss">:primary_symbol</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;ChordSymbol&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:primary</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:chord_scales</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:modes</span><span class="p">,</span> <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:chord_scales</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:tones</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;ChordTone&#39;</span><span class="p">,</span> <span class="ss">:extend</span> <span class="o">=&gt;</span> <span class="no">ToneSequence</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:voicings</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">#a lot more stuff</span>
+</span><span class='line'>  <span class="k">end</span> <span class="c1">#after that stuff</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We have associations happenin&#8217;, yo. In our study of ActiveRecord so far, we&rsquo;ve learned that objects can be related to one another; namely, a chord has many tones (makes sense), a chord has many voicings (these are inversions, a version of the chord that uses the same notes but in a different arrangement and note in the bass of the chord. But we can also see that it belongs_to chord quality &ndash; namely, there&rsquo;s a class called ChordQuality, and we can see a bit of it here:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">ChordQuality</span> <span class="o">&lt;</span> <span class="no">JazzModel</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:chords</span> <span class="c1">#&lt;- #Chords, I like you too.</span>
+</span><span class='line'>    <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>        <span class="nb">self</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">alias_method</span> <span class="ss">:[]</span><span class="p">,</span> <span class="ss">:resolve</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The relationship is reciprocated! And here&rsquo;s a quick look at what&rsquo;s going on in the database &ndash; this is a very truncated view and only represents the creation of the chords table!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">JazzModel</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">c</span><span class="o">.</span><span class="n">create_table</span> <span class="ss">:chord_qualities</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:name</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:code</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">c</span><span class="o">.</span><span class="n">create_table</span> <span class="ss">:chords</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">belongs_to</span> <span class="ss">:chord_quality</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:parent_id</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:name</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="ss">:synonyms</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="ss">:information</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can also see a nice implementation of the tap method in our table creation. Below, we can see some of the usages of the method notes(), which returns an array of the notes of a chord. For music theory buffs, notice that it returns the correctly-spelled notes, not just the enharmonically easier ones!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Enumerate notes of a Chord:</span>
+</span><span class='line'><span class="no">Chord</span><span class="o">[</span><span class="s1">&#39;maj&#39;</span><span class="o">].</span><span class="n">notes</span>   <span class="c1"># Defaults to C without specified key context#</span>
+</span><span class='line'><span class="c1">#=&gt; [&#39;C&#39;, &#39;E&#39;, &#39;G&#39;]</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Chord</span><span class="o">[</span><span class="s1">&#39;Ebmaj7&#39;</span><span class="o">].</span><span class="n">notes</span>
+</span><span class='line'><span class="c1">#=&gt; [&#39;Eb&#39;, &#39;G&#39;, &#39;Bb&#39;, &#39;D&#39;]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Or specify key context with chained methods like this...</span>
+</span><span class='line'><span class="no">Chord</span><span class="o">[</span><span class="s1">&#39;Bmaj7#11&#39;</span><span class="o">].</span><span class="n">notes</span>
+</span><span class='line'><span class="c1">#=&gt; [&#39;B&#39;, &#39;D#&#39;, &#39;F#&#39;, &#39;A#&#39;, &#39;E#&#39;]# Note E# - Correct theoretic value for this chord, not F</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Who knew there would be a &ldquo;notes&rdquo; method for chords in Ruby? I sure didn&rsquo;t. And you can solve problems like these:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Ruby Example Problem:</span>
+</span><span class='line'><span class="c1">#Find all chords associated with the Major scale and</span>
+</span><span class='line'><span class="c1">#print each on a new line with the chord tones.</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Scale</span><span class="o">[</span><span class="s1">&#39;Major&#39;</span><span class="o">].</span><span class="n">chords</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)}</span> <span class="o">*</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="c1"># =&gt; Major 7: C, E, G, B    </span>
+</span><span class='line'><span class="c1">#Major 6: C, E, G, A</span>
+</span><span class='line'><span class="c1">#Dominant 6/9: C, E, G, Bb, D, A</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Anyway, I think this could be a fun open-source project to contribute to.</p>
+
+<p>Cheers,</p>
+
+<p>W</p>
+
+		
+		
 	</div>
 
 
