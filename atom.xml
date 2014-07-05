@@ -4,7 +4,7 @@
   <title><![CDATA[Eternal White Belt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-07-04T18:38:58-04:00</updated>
+  <updated>2014-07-05T19:37:31-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -14,13 +14,189 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Using APIs with Ruby]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/07/05/using-apis-with-ruby/"/>
+    <updated>2014-07-05T19:21:23-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/07/05/using-apis-with-ruby</id>
+    <content type="html"><![CDATA[<p>So everyone loves philosophical musings about beginning and learning, but I thought today’s post should be a little more technical. The topic &ndash; using API’s and getting data from other websites! This will be a two-part series &ndash; the first part will center around using API’s with Ruby and the second will be a surprise.</p>
+
+<!--More-->
+
+
+<h2>Part 1: Background on APIs with Ruby!</h2>
+
+<h3>HTTP</h3>
+
+<p>Everyone who’s used a computer with internet recently has already used HTTP. That’s how browsing the internet works. You internet browser sends an HTTP <strong>request</strong> to a server, and the server sends a <strong>response</strong> back to you.</p>
+
+<p>When you navigate through a website, the links you’re clinking are all requests. And when you get to a different page with a different URL at the top, that’s a <strong>state transition</strong>; you have directed the next state of the application. HTTP is “<strong>stateless</strong>,” meaning that it has no memory across requests.</p>
+
+<p>So what the hell is an API, anyway? Isn’t that just like, a buzzword?</p>
+
+<p>Well, yes. Because APIs are really important and get a lot of attention these days. API stands for <strong>Application Programming Interface</strong>, and is really like a contract; it specifies the ways you can interact with an application. So if you wanted to interact with an app like Twitter, for example, you’d need to use their API, which would specify how you authenticate, use URLs, classes, and other methods, etc.</p>
+
+<h3>Making a Request</h3>
+
+<p>First, we <em>require</em> the ‘open-uri’ module, which allows us to bring in the additional methods and constants we need for our HTTP requests. ‘open-uri’ is a very cool module that allows us to do a lot with URLs; later we&rsquo;ll be using it to scrape the internet. But for now, suffice it to say that it&rsquo;s very useful.</p>
+
+<p>Here is an example that I found on CodeAcademy that is quite useful:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">kittens</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;http://placekitten.com&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">body</span> <span class="o">=</span> <span class="n">kittens</span><span class="o">.</span><span class="n">read</span><span class="o">[</span><span class="mi">559</span><span class="p">,</span> <span class="mi">441</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">body</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; &quot;Meow Meow Meow&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>More about HTTP</h3>
+
+<p>Let&rsquo;s learn a little more about HTTP before we dive more into the thick of it. First, we&rsquo;ll learn about the four types of requests in HTTP. This is a tad misleading, because</p>
+
+<p><strong>The Four Verbs For HTTP</strong></p>
+
+<p>GET &ndash; retrieves info from the source</p>
+
+<p>POST &ndash; sends new info to the source</p>
+
+<p>PATCH &ndash; updates information at the source</p>
+
+<p>DELETE &ndash; removes information from the source</p>
+
+<p><strong>The Anatomy of a Request</strong></p>
+
+<p>The <em>request line</em>: i.e. POST /willhasablog/yay HTTP/1.1</p>
+
+<p>The <em>header</em> i.e. Content-Type: text/html; charset=UTF-8</p>
+
+<p>The <em>body</em>: i.e. Name=You</p>
+
+<p><strong>Authentication &amp; API Keys</strong></p>
+
+<p>Most API’s require a key. The key accomplishes two things &ndash; not only does it grant you access, but it also identifies you TO the API &ndash; they like to know exactly how their service is used and prevent malicious activity.
+Keys look like this:</p>
+
+<p>api_key = “FtHwuH8w1RDjQpOr0y0gF3AWm8sRsRzncK3hHh9&#8221;</p>
+
+<h3>Responses</h3>
+
+<p>So we mentioned how every time you click on something on a site it’s actually a request to a remote server, right??
+So when you make a successful request, like, when your question is heard, you will get a response. And the response will, among other things, contain a three-digit status code! Isn’t that awesome? Websites aren’t like people; they can&rsquo;t stonewall you. They respond! And the status code can start with a 1, 2, 3, 4, or 5.</p>
+
+<p>100s &ndash; More uncommon, server is working on your request.</p>
+
+<p>200s &ndash; These mean ok- usually getting a 200 is the equivalent of things are fine.</p>
+
+<p>300s &ndash; These mean that the site can do what you want but you might have to be rerouted to accomplish it (like a change in URL requiring a redirect).</p>
+
+<p>400s &ndash; These are common &ndash; means that you probably made a mistake.</p>
+
+<p>500s &ndash; This means that the server goofed up and can’t successfully respond to the request.</p>
+
+<p><strong>The Anatomy of a Response:</strong></p>
+
+<p>Like a request, a response has three parts.</p>
+
+<p>The <em>response line</em>:i.e. HTTP/1.1 200 OK</p>
+
+<p>The <em>header</em>: i.e. Content-Type: text/xml; charset=UTF-8
+The <em>body</em>: i.e. &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;utf-8&rdquo;?></p>
+
+<h1><string xmlns=“http://wlowry88.github.io">Accepted</string></h1>
+
+<h3>XML and JSON</h3>
+
+<p><strong>WTF is XML?</strong></p>
+
+<p>XML is another markup language that is human and machine readable used to encode documents. Here&rsquo;s how you might parse it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="err">‘</span><span class="n">rexml</span><span class="o">/</span><span class="n">document</span><span class="err">’</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="err">“</span><span class="n">wlowrypost</span><span class="o">.</span><span class="n">txt</span><span class="err">”</span><span class="p">)</span>
+</span><span class='line'><span class="n">doc</span> <span class="o">=</span> <span class="no">REXML</span><span class="o">::</span><span class="no">Document</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span>
+</span><span class='line'><span class="n">file</span><span class="o">.</span><span class="n">close</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">doc</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="err">“</span><span class="n">pets</span><span class="o">/</span><span class="n">pet</span><span class="o">/</span><span class="nb">name</span><span class="err">”</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">element</span><span class="o">|</span>
+</span><span class='line'>     <span class="nb">puts</span> <span class="n">element</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>WTF is JSON?</strong></p>
+
+<p>JSON stands for <strong>J</strong>ava<strong>Script </strong>O<strong>bject</strong>N**otation. It is based off of JavaScript objects, which look a lot like hashes to us Rubyists. It is more succinct than the equivalent XML, and it doesn’t require tags.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">{</span>
+</span><span class='line'>   <span class="s2">&quot;Cartoon Foxes&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>     <span class="p">{</span>
+</span><span class='line'>      <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Fox Tall&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="s2">&quot;Job&quot;</span><span class="p">:</span> <span class="s2">&quot;Bein&#39; tall&quot;</span>
+</span><span class='line'>     <span class="p">},</span>
+</span><span class='line'>     <span class="p">{</span>
+</span><span class='line'>       <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Fox Small&quot;</span><span class="p">,</span>
+</span><span class='line'>       <span class="s2">&quot;Job&quot;</span><span class="p">:</span> <span class="s2">&quot;Bein&#39; small&quot;</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>So, XML or JSON?</strong>
+The only way you’ll know what type of data you’ll get from an API is to read it’s documentation.</p>
+
+<h3>Phew, that was a lot.</h3>
+
+<p>Thanks so much, and next time we&rsquo;ll actually put what we learned today to use.</p>
+
+<p>W</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[The Eternal Whitebelt?]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/04/White%20Belt/"/>
     <updated>2014-07-04T18:28:24-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/04/White Belt</id>
     <content type="html"><![CDATA[<h3>Inspiration</h3>
 
-<p>It&rsquo;s a rainy Fourth of July here in Needham, MA, the town in which I was initialized. It&rsquo;s a huge change of pace from NYC. It&rsquo;s pretty cool to be back and see my family. But it also got me thinking. I have been coding now every day for 5 weeks (I accidentally broke my streak on github because I didn&rsquo;t know committing to opened pull requests didn&rsquo;t count, argh >_&lt;), and I have begun to realize that I really enjoy this stuff. And I like it enough to do it professionally. But that also means that I have a really long way to go.</p>
+<p>It&rsquo;s a rainy Fourth of July here in Needham, MA, the town in which I was &ldquo;initialized&rdquo;. It&rsquo;s a huge change of pace from NYC. It&rsquo;s pretty cool to be back and see my family. But it also got me thinking. I have been coding now every day for 5 weeks (I accidentally broke my streak on github because I didn&rsquo;t know committing to opened pull requests didn&rsquo;t count, argh >_&lt;), and I have begun to realize that I really enjoy this stuff. And I like it enough to do it professionally. But that also means that I have a really long way to go.</p>
+
+<!-- more -->
+
 
 <h3>So, why the eternal white belt then? Don&rsquo;t you want to advance and improve?</h3>
 
@@ -44,6 +220,9 @@
     <updated>2014-07-04T17:13:09-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/04/jazz-model</id>
     <content type="html"><![CDATA[<p>So we&rsquo;ve been learning about ActiveRecord here at Flatiron School, and how it&rsquo;s a really awesome ORM that makes things much easier for us in developing applications. I&rsquo;ve also known for a while that there is a connection between music theory and programming, especially with Python, and I wondered if there were a way to combine it with Ruby.</p>
+
+<!-- more -->
+
 
 <p>Jazz Model is an ActiveRecord model of concepts in Jazz theory, establishing relationships between chords and scales, and much more.</p>
 
