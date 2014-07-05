@@ -7,6 +7,8 @@ categories:
 ---
 So we've been learning about ActiveRecord here at Flatiron School, and how it's a really awesome ORM that makes things much easier for us in developing applications. I've also known for a while that there is a connection between music theory and programming, especially with Python, and I wondered if there were a way to combine it with Ruby.
 
+<!-- more -->
+
 Jazz Model is an ActiveRecord model of concepts in Jazz theory, establishing relationships between chords and scales, and much more.
 
 The core of Jazz Toolbox is a full Ruby object model representing concepts of Jazz theory

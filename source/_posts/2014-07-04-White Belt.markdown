@@ -10,6 +10,8 @@ categories:
 
 It's a rainy Fourth of July here in Needham, MA, the town in which I was "initialized". It's a huge change of pace from NYC. It's pretty cool to be back and see my family. But it also got me thinking. I have been coding now every day for 5 weeks (I accidentally broke my streak on github because I didn't know committing to opened pull requests didn't count, argh >_<), and I have begun to realize that I really enjoy this stuff. And I like it enough to do it professionally. But that also means that I have a really long way to go. 
 
+<!-- more -->
+
 ###So, why the eternal white belt then? Don't you want to advance and improve?
 
 Without getting overly philosophical, I think it's really all about leaving your ego at the door and being ready to learn like a beginner. The white belt is a powerful tool - it allows you to know that you're not stupid, not completely incompetent, but acknowledge you may know nothing about a particular discipline. Yet. And that's completely ok. It helps keep things fresh; I think the best default state is to be learning.
