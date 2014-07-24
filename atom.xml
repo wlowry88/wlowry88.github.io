@@ -4,7 +4,7 @@
   <title><![CDATA[Eternal White Belt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-07-05T19:37:31-04:00</updated>
+  <updated>2014-07-24T00:14:56-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -12,6 +12,356 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Giving Pry a Try]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/07/13/giving-pry-a-try/"/>
+    <updated>2014-07-13T19:25:44-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/07/13/giving-pry-a-try</id>
+    <content type="html"><![CDATA[<h3><strong>Inspiration</strong></h3>
+
+<p>We were in lecture here at the Flatiron School the other day, and Avi mentioned something called a REPL. He also mentioned that one of our favorite debugging tools, Pry, had a lot of cool functionality that we don&rsquo;t often exploit, so I decided to dig around a little bit and see what I could find.</p>
+
+<!-- More -->
+
+
+<h3><strong>REPLs</strong></h3>
+
+<p>What is a <strong>REPL</strong>? The acronym itself stands for &ldquo;<strong>r</strong>ead-<strong>e</strong>val-<strong>p</strong>rint-<strong>l</strong>oop,&rdquo; and describes an environment where you type in code and get interactive feedback immediately. This type of tool is also known as an interactive top-level or language shell. It’s super easy to use for beginners, which is part of what has made Code School and Codeacademy so successful. No text editors, just instant feedback. For example, while making my Tic-Tac-Toe, I used <a href="http://repl.it/languages/Ruby">this online REPL extensively</a>. When you&rsquo;re at the earliest stage of learning to code this is a great tool. However, REPL&rsquo;s are also very useful for full-fledged developers.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Some random REPL output:</span>
+</span><span class='line'><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+</span><span class='line'><span class="c1">#=&gt; 4</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We also have experience with REPL’s &ndash; such as our friend <strong>IRB</strong> (Interactive Ruby!). IRB is pretty cool for interpreting your Ruby on the spot, and it&rsquo;s definitely useful, but it also doesn’t really have too many features. And sometimes, it&rsquo;s a little visually confusing; anyone who has ever tried to define a method in IRB knows that it messes up the indentation a bit, for instance. There&rsquo;s definitely no syntax highlighting, and it&rsquo;s not really that useful from a debugging standpoint. In order to access the methods from your actual program, for instance, you&rsquo;re often stuck copying and pasting, which gets funky pretty quickly. You&rsquo;d BETTER have converted from tabs to spaces before that. And also, you get annoying (“Do you really want to display all 9423 items?” anyone??”)-type messages.</p>
+
+<h3><strong>Enter &lsquo;Pry&rsquo;</strong></h3>
+
+<p>Pry is d0pe. It works as a powerful alternative to the standard IRB shell for Ruby. It features <em>syntax highlighting</em>, a <em>flexible_plugin_architecture</em>, <em>runtime_invocation</em> and <em>source/documentation_browsing</em>! Us Flatiron School Ruby 005&rsquo;s have already used it for debugging purposes, but it can do a <strong>whole lot more</strong>.</p>
+
+<p>Pry is super easy to install: <code>gem install pry</code> does the trick. Like IRB, Pry can be invoked right from the command line. <strong>To start it, just type “pry”.</strong> Then you will be in something that looks and feels like IRB, but is better in a lot of ways! For example, all the indentation works well, and you have syntax highlighting. <strong>You&rsquo;re able to customize all of this as well in your &ldquo;.pryrc&rdquo; file.</strong> This is analogous to the IRB &ldquo;.irbrc&rdquo; file. For example, here is a way to make it so that your pry output uses awesome print:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># ==============================</span>
+</span><span class='line'><span class="c1">#   Awesome Print</span>
+</span><span class='line'><span class="c1"># ==============================</span>
+</span><span class='line'><span class="c1"># Pretty print your Ruby objects with style -- in full color and with proper indentation</span>
+</span><span class='line'><span class="c1"># http://github.com/michaeldv/awesome_print</span>
+</span><span class='line'><span class="k">if</span> <span class="n">defined?</span> <span class="no">AwesomePrint</span>
+</span><span class='line'>  <span class="no">AwesomePrint</span><span class="o">.</span><span class="n">pry!</span>
+</span><span class='line'>  <span class="c1">## The following line enables awesome_print for all pry output,</span>
+</span><span class='line'>  <span class="c1"># and enables paging using Pry&#39;s pager with awesome_print.</span>
+</span><span class='line'>  <span class="no">Pry</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">print</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">output</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="no">Pry</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">BaseHelpers</span><span class="o">.</span><span class="n">stagger_output</span><span class="p">(</span><span class="s2">&quot;=&gt; </span><span class="si">#{</span><span class="n">value</span><span class="o">.</span><span class="n">ai</span><span class="p">(</span><span class="ss">indent</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)}</span>
+</span><span class='line'>  <span class="c1">## If you want awesome_print without automatic pagination, use below:</span>
+</span><span class='line'>  <span class="c1"># Pry.config.print = proc { |output, value| output.puts value.ai }</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">## Evaluated result display inline</span>
+</span><span class='line'>  <span class="c1"># Pry.config.print = lambda { |output, value| output.print &quot;\e[1A\e[18C # =&gt; &quot;; output.puts value.inspect }</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">## if in bundler, break out, so awesome print doesn&#39;t have to be in Gemfile</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">defined?</span> <span class="no">Bundler</span>
+</span><span class='line'>    <span class="no">Gem</span><span class="o">.</span><span class="n">post_reset_hooks</span><span class="o">.</span><span class="n">reject!</span> <span class="p">{</span> <span class="o">|</span><span class="n">hook</span><span class="o">|</span> <span class="n">hook</span><span class="o">.</span><span class="n">source_location</span><span class="o">.</span><span class="n">first</span> <span class="o">=~</span> <span class="sr">%r{/bundler/}</span> <span class="p">}</span>
+</span><span class='line'>    <span class="no">Gem</span><span class="o">::</span><span class="no">Specification</span><span class="o">.</span><span class="n">reset</span>
+</span><span class='line'>    <span class="nb">load</span> <span class="s1">&#39;rubygems/custom_require.rb&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">## awesome_print config for Minitest.</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">defined?</span> <span class="no">Minitest</span>
+</span><span class='line'>    <span class="k">module</span> <span class="nn">Minitest::Assertions</span>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">mu_pp</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">obj</span><span class="o">.</span><span class="n">awesome_inspect</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><strong>TONS OF AWESOME FEATURES</strong></h3>
+
+<p>First, you can get to the entire Ruby documentation from <strong>inside pry</strong>. This is really awesome, because it means that we can be lazier and avoid the treachorous Google path and not have to leave our shell. For example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pry</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">show</span><span class="o">-</span><span class="n">doc</span> <span class="nb">Array</span><span class="c1">#each</span>
+</span><span class='line'>
+</span><span class='line'><span class="ss">From</span><span class="p">:</span> <span class="n">array</span><span class="o">.</span><span class="n">c</span> <span class="p">(</span><span class="n">C</span> <span class="no">Method</span><span class="p">):</span>
+</span><span class='line'><span class="ss">Owner</span><span class="p">:</span> <span class="nb">Array</span>
+</span><span class='line'><span class="ss">Visibility</span><span class="p">:</span> <span class="kp">public</span>
+</span><span class='line'><span class="ss">Signature</span><span class="p">:</span> <span class="n">each</span><span class="p">()</span>
+</span><span class='line'><span class="no">Number</span> <span class="n">of</span> <span class="ss">lines</span><span class="p">:</span> <span class="mi">11</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Calls</span> <span class="n">the</span> <span class="n">given</span> <span class="n">block</span> <span class="n">once</span> <span class="k">for</span> <span class="n">each</span> <span class="n">element</span> <span class="k">in</span> <span class="nb">self</span><span class="p">,</span> <span class="n">passing</span> <span class="n">that</span> <span class="n">element</span>
+</span><span class='line'><span class="n">as</span> <span class="n">a</span> <span class="n">parameter</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">An</span> <span class="no">Enumerator</span> <span class="n">is</span> <span class="n">returned</span> <span class="k">if</span> <span class="n">no</span> <span class="n">block</span> <span class="n">is</span> <span class="n">given</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="n">a</span> <span class="o">=</span> <span class="o">[</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span> <span class="o">]</span>
+</span><span class='line'>   <span class="n">a</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="nb">print</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot; -- &quot;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="ss">produces</span><span class="p">:</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="n">a</span> <span class="o">--</span> <span class="n">b</span> <span class="o">--</span> <span class="n">c</span> <span class="o">--</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pretty cool, right? And for those people who are curious how a method based in C works, you can also get to the source code of the method really easily!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">show</span><span class="o">-</span><span class="nb">method</span> <span class="nb">Array</span><span class="c1">#each</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt;</span>
+</span><span class='line'><span class="ss">From</span><span class="p">:</span> <span class="n">array</span><span class="o">.</span><span class="n">c</span> <span class="p">(</span><span class="n">C</span> <span class="no">Method</span><span class="p">):</span>
+</span><span class='line'><span class="ss">Owner</span><span class="p">:</span> <span class="nb">Array</span>
+</span><span class='line'><span class="ss">Visibility</span><span class="p">:</span> <span class="kp">public</span>
+</span><span class='line'><span class="no">Number</span> <span class="n">of</span> <span class="ss">lines</span><span class="p">:</span> <span class="mi">12</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">VALUE</span>
+</span><span class='line'><span class="n">rb_ary_each</span><span class="p">(</span><span class="no">VALUE</span> <span class="n">array</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">long</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">volatile</span> <span class="no">VALUE</span> <span class="n">ary</span> <span class="o">=</span> <span class="n">array</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">RETURN_SIZED_ENUMERATOR</span><span class="p">(</span><span class="n">ary</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ary_enum_length</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="no">RARRAY_LEN</span><span class="p">(</span><span class="n">ary</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">rb_yield</span><span class="p">(</span><span class="no">RARRAY_AREF</span><span class="p">(</span><span class="n">ary</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ary</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wow!! And you can also totally get line numbers with the <code>-l</code> option.</p>
+
+<p>You can also get a Github gist of any method! Once you install the <code>gist</code> gem, you can totally generate a gist with one command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">gist</span> <span class="o">-</span><span class="n">m</span> <span class="no">Symbol</span><span class="c1">#to_proc</span>
+</span><span class='line'><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="no">Gist</span> <span class="n">created</span> <span class="n">at</span> <span class="no">URL</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">gist</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">381</span><span class="n">e426ba5a0307066b3</span><span class="p">,</span> <span class="n">which</span> <span class="n">is</span> <span class="n">now</span> <span class="k">in</span> <span class="n">the</span> <span class="n">clipboard</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Sweet. Github just created a Gist of your code.</p>
+
+<p>Pry supports a bash-like method of navigation. When you&rsquo;re in Pry, you can type <strong>&ldquo;whereami&rdquo;</strong> at any time, and it works a lot like the <strong>pwd</strong> command in bash. You can type <strong>ls</strong> to see the directories and files in your current level of Pry, and can even &ldquo;cd&rdquo; into them.</p>
+
+<h3>Practical Use!</h3>
+
+<p>So let&rsquo;s actually use it a little bit. Here, we&rsquo;ll use it to help improve our Sailor model.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;pry&#39;</span> <span class="c1">#remember to require the &#39;pry&#39; gem.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Sailor</span>
+</span><span class='line'>      <span class="kp">attr_reader</span> <span class="ss">:name</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>          <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">say_hello_to_everyone</span>
+</span><span class='line'>          <span class="n">put</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> at your service, Captain!&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">go_sailing</span>
+</span><span class='line'>          <span class="nb">puts</span> <span class="s2">&quot;Weeeeeeeeeeee&quot;</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="nb">binding</span><span class="o">.</span><span class="n">pry</span>         <span class="c1">#&lt;= We stick &#39;binding.pry&#39; into our code to stop it there.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And then your binding stops your code in its tracks! It keeps track of your line numbers and stops you exactly where you want it to.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">From</span><span class="p">:</span> <span class="sr">/Users/</span><span class="n">wlowry</span><span class="o">/</span><span class="no">Desktop</span><span class="o">/</span><span class="n">sailor</span><span class="o">.</span><span class="n">rb</span> <span class="err">@</span> <span class="n">line</span> <span class="mi">18</span> <span class="p">:</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="mi">13</span><span class="p">:</span>
+</span><span class='line'>    <span class="mi">14</span><span class="p">:</span>   <span class="k">def</span> <span class="nf">go_sailing</span>
+</span><span class='line'>    <span class="mi">15</span><span class="p">:</span>     <span class="nb">puts</span> <span class="s2">&quot;Weeeeeeeeeeee&quot;</span>
+</span><span class='line'>    <span class="mi">16</span><span class="p">:</span>   <span class="k">end</span>
+</span><span class='line'>    <span class="mi">17</span><span class="p">:</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">18</span><span class="p">:</span>   <span class="nb">binding</span><span class="o">.</span><span class="n">pry</span>         <span class="c1">#&lt;= We stick &#39;binding.pry&#39;</span>
+</span><span class='line'>    <span class="mi">19</span><span class="p">:</span> <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="no">Sailor</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">ls</span> <span class="o">-</span><span class="n">M</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="no">Sailor</span><span class="c1">#methods: go_sailing  name  say_hello_to_everyone</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="no">Sailor</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">arel</span> <span class="o">=</span> <span class="no">Sailor</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Arel&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Sailor:0x0000010222d7d0 @name=&quot;Arel&quot;&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="no">Sailor</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">arel</span><span class="o">.</span><span class="n">say_hello_to_everyone</span>
+</span><span class='line'><span class="ss">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`put&#39; for #&lt;Sailor:0x0000010222d7d0 @name=&quot;Arel&quot;&gt;</span>
+</span><span class='line'><span class="sb">from sailor.rb:11:in &#39;say_hello_to_everyone`</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="no">Sailor</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">wtf</span>
+</span><span class='line'><span class="c1">#Exception: NoMethodError: undefined method `put` for #&lt;Sailor:0x000001028a8768 @name=&quot;Arel&quot;&gt;</span>
+</span><span class='line'><span class="o">--</span>
+</span><span class='line'><span class="c1">#0: sailor.rb:11:in `say_hello_to_everyone`</span>
+</span><span class='line'><span class="c1">#1: (pry):3:in `&lt;class:Sailor&gt;&#39;</span>
+</span><span class='line'><span class="c1">#2: /Users/wlowry/.rvm/gems/ruby-2.1.2/gems/pry-0.10.0/lib/pry/pry_instance.rb:353:in `eval&#39;</span>
+</span><span class='line'><span class="c1">#3: /Users/wlowry/.rvm/gems/ruby-2.1.2/gems/pry-0.10.0/lib/pry/pry_instance.rb:353:in `evaluate_ruby&#39;</span>
+</span><span class='line'><span class="c1">#4: /Users/wlowry/.rvm/gems/ruby-2.1.2/gems/pry-0.10.0/lib/pry/pry_instance.rb:321:in `handle_line&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="n">edit</span> <span class="n">say_hello_to_everyone</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Breakdown of what just happened</h3>
+
+<p>1) Wow, <code>binding.pry</code> stopped me in the middle of my code. Now I can run <code>ls</code> as if I were in a bash terminal, and I can also use the <code>-M</code> option to specify that I want to see all the methods of the class. Wow! It returns them right there for me to see (Note: if you do this in Rails, you&rsquo;ll realize how much the framework gives you, it&rsquo;s nuts).</p>
+
+<p>2) Oh cool, I can instantiate new instances of my Sailor class right there on the spot; I don&rsquo;t need to copy and paste my class into my REPL and waste time. We don&rsquo;t have a console in this application, so this is very useful.</p>
+
+<p>3) Lets try exercising the full power of our sailor, Arel. When we call <code>say_hello_to_everyone</code> on our swabber, we get an error. It looks like there&rsquo;s a breakdown in line 11: there is no method <code>put</code> for Arel. Well, that makes sense, because it was a typo!</p>
+
+<p>4) If you type in <code>wtf</code> anywhere in pry, it returns the last error message that was logged (it keeps track of your history, accessible with the <code>history</code> command):D.</p>
+
+<p>5) Wow, so I need to edit that &ldquo;say_hello_to_everyone&rdquo; method. But I can totally just do that by typing in <code>edit say_hello_to_everyone</code>. And then you know what it does? It sends me right over into Sublime, right to the CORRECT LINE where the method is defined. HOW COOL IS THAT?</p>
+
+<h3>Conclusion</h3>
+
+<p>So pry is pretty awesome &ndash; at the minimum it&rsquo;s better at doing most of the things you need than IRB. And I know what you&rsquo;re thinking &ndash; &ldquo;it would be so awesome to include this in my rails projects and run pry instead of the rails console.&rdquo; Guess what: You TOTALLY CAN!</p>
+
+<p>Add this line to your Gemfile:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;pry-rails&#39;</span><span class="p">,</span> <span class="ss">:group</span> <span class="o">=&gt;</span> <span class="ss">:development</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once you update your Gemfile and run <code>bundle install</code>, you&rsquo;re ready to enjoy Pry and all of the benefits it brings. You&rsquo;ll be well on your way to understanding how your code works and debugging uber efficiently, without headaches, and with color syntax highlighting :)</p>
+
+<p>Until next time, enjoy Pry!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using APIs with Ruby]]></title>
