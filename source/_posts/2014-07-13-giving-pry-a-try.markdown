@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Giving Pry a Try"
+title: "Using Pry for More Efficient Debugging"
 date: 2014-07-13 19:25:44 -0400
 comments: true
 categories: 
