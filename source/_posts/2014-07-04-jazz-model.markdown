@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Jazz Model"
+title: "An ActiveRecord Model of Jazz??"
 date: 2014-07-04 17:13:09 -0400
 comments: true
 categories: 
