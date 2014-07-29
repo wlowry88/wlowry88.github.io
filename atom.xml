@@ -4,7 +4,7 @@
   <title><![CDATA[Eternal White Belt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-07-28T23:02:06-04:00</updated>
+  <updated>2014-07-28T23:04:06-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -621,7 +621,7 @@ The only way you’ll know what type of data you’ll get from an API is to read
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Jazz Model]]></title>
+    <title type="html"><![CDATA[An ActiveRecord Model of Jazz??]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/04/jazz-model/"/>
     <updated>2014-07-04T17:13:09-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/04/jazz-model</id>
