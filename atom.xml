@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Eternal White Belt]]></title>
+  <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-07-28T23:04:06-04:00</updated>
+  <updated>2014-07-28T23:07:36-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -70,7 +70,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Giving Pry a Try]]></title>
+    <title type="html"><![CDATA[Using Pry for More Efficient Debugging]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/13/giving-pry-a-try/"/>
     <updated>2014-07-13T19:25:44-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/13/giving-pry-a-try</id>
