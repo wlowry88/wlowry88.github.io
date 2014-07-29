@@ -4,7 +4,7 @@
   <title><![CDATA[Eternal White Belt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-07-24T00:14:56-04:00</updated>
+  <updated>2014-07-28T23:02:06-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Pros and Cons of Turbolinks in Rails 4 Applications]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/07/28/pros-and-cons-of-turbolinks-in-rails-4-applications/"/>
+    <updated>2014-07-28T22:02:31-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/07/28/pros-and-cons-of-turbolinks-in-rails-4-applications</id>
+    <content type="html"><![CDATA[<h3>Inspiration</h3>
+
+<p>Recently, I was playing around with jQuery and AJAX since we&rsquo;d been learning about how to use event listeners and asynchronous Javascript requests. I made a blogging app that can add and edit posts and comments on those posts using AJAX. Additionally, I tried to add in a few event listeners using jQuery, such as using a slideToggle function on showing the full text of a post or the add comment form.</p>
+
+<p>Everything was going great; refreshing the posts index page yielded all my nice front-end effects. Until I tried linking to it.</p>
+
+<p>THEN EVERYTHING BROKE.</p>
+
+<!--More-->
+
+
+<h3>What are turbolinks?</h3>
+
+<p>If you don&rsquo;t know what they do, it&rsquo;s not that complex. Basically, turbolinks will capture all links that look like they go to HTML pages (links using restful routes are prime candidates), makes an AJAX request for the content, and then replaces the body with the response&rsquo;s body. It has the potential to speed up your app a little bit. Steve Klabnik wrote a <a href="http://blog.steveklabnik.com/posts/2012-09-27-seriously--numbers--use-them-">post</a> about testing speed differences. The difference can be measurable &ndash; using Basecamp Next&rsquo;s CSS and JS files, turbolinks were able to decrease testing time by about 11 seconds. Not bad.</p>
+
+<h3>The Problems</h3>
+
+<p>The first problem is that Turbolinks do not call document’s ready event. Say you wanted to use Javascript&rsquo;s alert function on a page, or if you wanted to hide an element as soon as the page is loaded (perhaps to be shown later).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;You&#39;re seeing me if this page was directly loaded&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="c1">// a popup window</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#thing-we-wanted-hidden&quot;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'><span class="c1">// won&#39;t work on a link.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The code above will only work when the page is refreshed directly. Unfortunately, when a page is accessed via a link in Rails 4, the turbolinks gem doesn&rsquo;t fetch it. Note, there is a workaround for this particular issue (jquery-turbolinks) but it&rsquo;s still a little annoying. And it doesn&rsquo;t address another issue.</p>
+
+<p>Turbolinks can speed things up a little because it doesn&rsquo;t need to reload your assets. But it&rsquo;s more than just the assets that are saved. The entire global scope is saved. Yehuda Katz has said that &ldquo;a lot of existing JavaScript operates under the assumption of a clean scope, and a single DOMContentLoaded event,&rdquo; and I tend to agree after my experience thus far. While it&rsquo;s possible to add workarounds (for example, I would re-apply most of my page-load jQuery effects in my Ajax-returned javascript), we&rsquo;re doing pretty simple jQuery so far and I can only assume that complications will increase when using more advanced third-party Javascript.</p>
+
+<h3>Ok, so how do you I rid of turbolinks in my app?</h3>
+
+<p>To remove turbolinks from your Rails 4 Application, you should follow 3 simple steps:</p>
+
+<ol>
+<li><p>Delete the line <code>turbolinks</code> in your Gemfile to remove the turbolinks gem.</p></li>
+<li><p>Delete the line <code>//= require turbolinks</code> in your app/assets/javascripts/application.js file to stop the asset pipeline from trying to require turbolinks.</p></li>
+<li><p>Delete both lines <code>data-turbolinks-track =&gt; true</code> key/value pairs in your app/views/layouts/application.html.erb file to stop including a now-invalid hash option.</p></li>
+</ol>
+
+
+<h3>Conclusion</h3>
+
+<p>If you&rsquo;re trying to include a good amount of Javascript, jQuery <a href="https://github.com/kossnocorp/jquery.turbolinks">Turbolinks</a> seem to be more trouble than they&rsquo;re worth.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Giving Pry a Try]]></title>
