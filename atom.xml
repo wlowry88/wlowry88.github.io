@@ -4,7 +4,7 @@
   <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-07-28T23:07:36-04:00</updated>
+  <updated>2014-08-17T18:19:53-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -14,13 +14,166 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Google OAuth 2.0 Login in Rails 4]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/08/02/google-contacts-api-with-oauth-in-rails/"/>
+    <updated>2014-08-02T23:06:27-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/08/02/google-contacts-api-with-oauth-in-rails</id>
+    <content type="html"><![CDATA[<p>The process of logging in with Oauth may seem complex the first time you do it, but it becomes easier the second time around. This article assumes some familiarity with Ruby and the structure of a Rails application (but not too much :)</p>
+
+<!--More-->
+
+
+<h3>Step 1: Set Up a Google App</h3>
+
+<p>First, go to this URL and</p>
+
+<p>1) Set up a developer account and
+2) Create a new project:</p>
+
+<p><a href="https://code.google.com/apis/console">https://code.google.com/apis/console</a></p>
+
+<p>You will see that you now have access to your project on the Projects page. Click into your project and then go to the credentials tab (in the left menu).</p>
+
+<p>Note that the client ID and client secret are important &ndash; we&rsquo;ll be using those later. In the meantime, make sure that your redirect uri is the following:</p>
+
+<p><a href="http://localhost:3000/auth/google_oauth2/callback">http://localhost:3000/auth/google_oauth2/callback</a></p>
+
+<p>This is important because it&rsquo;s where Google will send info on the user who logged in.</p>
+
+<h3>Step 2: Update your Gemfile</h3>
+
+<p>Make sure your Gemfile includes the Google OmniAuth gem as well as the Figaro gem. Figaro is helpful in keeping your key and secret confidential (you can learn more about it <a href="http://rubydoc.info/gems/figaro/0.7.0/frames">here</a>).</p>
+
+<p><code>gem "omniauth-google-oauth2"</code>
+<code>gem "figaro"</code></p>
+
+<p>Run a bundle install and update. This will create a few files, including the ominauth.rb file in your initializers directory.</p>
+
+<h3>Step 3: Configuring Routes</h3>
+
+<p>In your routes file, make sure that there is something that looks like the following:</p>
+
+<p><code>get 'auth/:provider/callback', to: 'sessions#create'</code></p>
+
+<p>After clicking your future &ldquo;Log In With Google&rdquo; button, Google will send back a hash with lots of information on the user. The information will be send using this route.</p>
+
+<h3>Step 4: Generate Sessions Controller and Create Action</h3>
+
+<p>Run the following command:
+<code>rails g controller sessions create</code></p>
+
+<p>Then, in your create action in the sessions controller, use the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>      <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">from_omniauth</span><span class="p">(</span><span class="vi">@auth</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@auth</span> <span class="o">=</span> <span class="n">env</span><span class="o">[</span><span class="s2">&quot;omniauth.auth&quot;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">session</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">root_path</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, when the information is sent to the URL we already specified, it will be routed to the create action of our Sessions controller. It will then use the hash returned by OmniAuth to create a user.</p>
+
+<h3>Step 5: Update User Model and Define from_omniauth</h3>
+
+<p>As many of you astute readers will have realized, we will need to define a method called &ldquo;from_omniauth&rdquo; in our User model for the above code to work. Let&rsquo;s do that as well.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">from_omniauth</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+</span><span class='line'><span class="n">where</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="ss">:provider</span><span class="p">,</span> <span class="ss">:uid</span><span class="p">))</span><span class="o">.</span><span class="n">first_or_initialize</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">user</span><span class="o">.</span><span class="n">provider</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">provider</span>
+</span><span class='line'>  <span class="n">user</span><span class="o">.</span><span class="n">uid</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">uid</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">user</span><span class="o">.</span><span class="n">oauth_token</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span>
+</span><span class='line'>  <span class="n">user</span><span class="o">.</span><span class="n">oauth_expires_at</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">expires_at</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">user</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You may need to create a migration to add the <code>provider</code>, <code>uid</code>, <code>oauth_token</code>, and <code>oauth_expires_at</code> columns to your <code>users</code> table. The following line will do it for you if you haven&rsquo;t:</p>
+
+<p><code>rails g migration AddDetailsToUser provider uid oauth_token oauth_expires_at</code></p>
+
+<p>And then you simply migrate your database to reflect those changes:</p>
+
+<p><code>rake db:migrate</code></p>
+
+<h3>Step 6: Configure Ominauth.rb Initializer</h3>
+
+<p>So far, we have set up a mechanism to recieve the information back from Google when a user logs in. Now, we&rsquo;ll make sure we also configure the sending of the request.</p>
+
+<p>You have a file called &ldquo;omniauth.rb&rdquo; in your &lsquo;config/initializers/&rsquo; directory. Make the contents of the file look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">use</span> <span class="no">OmniAuth</span><span class="o">::</span><span class="no">Builder</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">provider</span> <span class="ss">:google_oauth2</span><span class="p">,</span> <span class="no">ENV</span><span class="o">[</span><span class="no">GOOGLE_KEY</span><span class="o">]</span><span class="p">,</span> <span class="no">ENV</span><span class="o">[</span><span class="no">GOOGLE_SECRET</span><span class="o">]</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">redirect_uri</span><span class="ss">:&quot;http://localhost:3000/auth/google_oauth2/callback&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This makes sure that the OAuth request is built with the right id and secret. You&rsquo;re probably wondering what the hell &ldquo;GOOGLE_SECRET&rdquo; are. They look like pretty random uninitialized constants. Let&rsquo;s fix that.</p>
+
+<h3>Step 7: Your application.yml File</h3>
+
+<p>When you included the Figaro gem, you were actually taking the first steps to protecting your app&rsquo;s secret information. You don&rsquo;t want to post that on Github &ndash; it makes it too easy for someone to come along and steal it. Instead, we&rsquo;re using Figaro, which allows you to put all your secrets in one file, application.yml, which is automatically &ldquo;gitignored.&rdquo; This way, it won&rsquo;t be public. Your application.yml file should look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">GOOGLE_KEY</span><span class="p">:</span> <span class="s2">&quot;2asflskf103f_not_a_real_key_don&#39;t_try_and_use_it&quot;</span>
+</span><span class='line'><span class="no">GOOGLE_SECRET</span><span class="p">:</span> <span class="s2">&quot;2asl2tzz_ditto_on_this_one&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Restart your server if it&rsquo;s running &ndash; initializers are rerun upon server start!</p>
+
+<h3>Step 8: Include Your Link or Google Button, and Enjoy!</h3>
+
+<p>Now you can include a link in your project anywere you want people to be able to sign in with Google. Some natural spots might be a login page or on your navbar, but it&rsquo;s up to you!</p>
+
+<p>The url of the link should be <code>/auth/google_oauth2</code>. This doesn&rsquo;t have the <code>/callback</code> appended to it because the callback is for- you guessed it- the callback.</p>
+
+<h3>Step 9: Dominate the World Vicariously Through Google</h3>
+
+<p>Tada! You&rsquo;re done!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Pros and Cons of Turbolinks in Rails 4 Applications]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/28/pros-and-cons-of-turbolinks-in-rails-4-applications/"/>
     <updated>2014-07-28T22:02:31-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/28/pros-and-cons-of-turbolinks-in-rails-4-applications</id>
-    <content type="html"><![CDATA[<h3>Inspiration</h3>
-
-<p>Recently, I was playing around with jQuery and AJAX since we&rsquo;d been learning about how to use event listeners and asynchronous Javascript requests. I made a blogging app that can add and edit posts and comments on those posts using AJAX. Additionally, I tried to add in a few event listeners using jQuery, such as using a slideToggle function on showing the full text of a post or the add comment form.</p>
+    <content type="html"><![CDATA[<p>Recently, I was playing around with jQuery and AJAX since we&rsquo;d been learning about how to use event listeners and asynchronous Javascript requests. I made a blogging app that can add and edit posts and comments on those posts using AJAX. Additionally, I tried to add in a few event listeners using jQuery, such as using a slideToggle function on showing the full text of a post or the add comment form.</p>
 
 <p>Everything was going great; refreshing the posts index page yielded all my nice front-end effects. Until I tried linking to it.</p>
 
@@ -74,9 +227,7 @@
     <link href="http://wlowry88.github.io/blog/2014/07/13/giving-pry-a-try/"/>
     <updated>2014-07-13T19:25:44-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/13/giving-pry-a-try</id>
-    <content type="html"><![CDATA[<h3><strong>Inspiration</strong></h3>
-
-<p>We were in lecture here at the Flatiron School the other day, and Avi mentioned something called a REPL. He also mentioned that one of our favorite debugging tools, Pry, had a lot of cool functionality that we don&rsquo;t often exploit, so I decided to dig around a little bit and see what I could find.</p>
+    <content type="html"><![CDATA[<p>We were in lecture here at the Flatiron School the other day, and Avi mentioned something called a REPL. He also mentioned that one of our favorite debugging tools, Pry, had a lot of cool functionality that we don&rsquo;t often exploit, so I decided to dig around a little bit and see what I could find.</p>
 
 <!-- More -->
 
