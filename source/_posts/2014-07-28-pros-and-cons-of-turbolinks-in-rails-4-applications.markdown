@@ -6,7 +6,6 @@ comments: true
 categories: 
 ---
 
-###Inspiration
 Recently, I was playing around with jQuery and AJAX since we'd been learning about how to use event listeners and asynchronous Javascript requests. I made a blogging app that can add and edit posts and comments on those posts using AJAX. Additionally, I tried to add in a few event listeners using jQuery, such as using a slideToggle function on showing the full text of a post or the add comment form. 
 
 Everything was going great; refreshing the posts index page yielded all my nice front-end effects. Until I tried linking to it. 

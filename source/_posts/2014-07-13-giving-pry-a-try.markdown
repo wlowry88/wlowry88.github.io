@@ -5,7 +5,6 @@ date: 2014-07-13 19:25:44 -0400
 comments: true
 categories: 
 ---
-###**Inspiration**
 
 We were in lecture here at the Flatiron School the other day, and Avi mentioned something called a REPL. He also mentioned that one of our favorite debugging tools, Pry, had a lot of cool functionality that we don't often exploit, so I decided to dig around a little bit and see what I could find. 
 <!-- More -->
