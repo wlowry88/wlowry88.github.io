@@ -4,7 +4,7 @@
   <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-08-17T23:03:36-04:00</updated>
+  <updated>2014-08-17T23:04:16-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Taste Of Metaprogramming: Method_Missing]]></title>
-    <link href="http://wlowry88.github.io/blog/2014/08/17/a-taste-of-metaprogramming-method-missing/"/>
-    <updated>2014-08-17T21:35:02-04:00</updated>
-    <id>http://wlowry88.github.io/blog/2014/08/17/a-taste-of-metaprogramming-method-missing</id>
+    <link href="http://wlowry88.github.io/blog/2014/08/06/a-taste-of-metaprogramming-method-missing/"/>
+    <updated>2014-08-06T21:35:02-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/08/06/a-taste-of-metaprogramming-method-missing</id>
     <content type="html"><![CDATA[<p>Anyone with a background in Ruby has seen a hash before. And anyone with a background in Javascript has seen a Javascript Object before. I encountered an interesting problem on CodeWars.com and wanted to share. The problem deals with accessing data in Ruby hashes the way you can in Javascript objects &ndash; by using the dot notation.</p>
 
 <!--More-->
