@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A Taste Of Metaprogramming: Method_Missing"
-date: 2014-08-17 21:35:02 -0400
+date: 2014-08-06 21:35:02 -0400
 comments: true
 categories: 
 ---
