@@ -3,7 +3,7 @@ layout: post
 title: "Linked Lists in Ruby"
 date: 2014-08-20 23:51:07 -0400
 comments: true
-categories: Ruby, Linked, Lists, CS
+categories: Ruby Linked Lists CS
 ---
 
 This post is centered around linked lists using Ruby. 
@@ -17,15 +17,21 @@ The flip-side of this, however, is that performing operations requiring access t
 Here are some additional advantages and disadvantages of linked lists:
 
 LL Pros:
-+ Dynamic - LL's allocate the needed memory when the program is initiated and can can expand in real time without memory overload.
-+ Insertion and deletion is easy.
-+ It's easy to building linear data structures such as stacks and queues with linked lists.
+
+- Dynamic - LL's allocate the needed memory when the program is initiated and can can expand in real time without memory overload.
+
+- Insertion and deletion is easy.
+
+- It's easy to building linear data structures such as stacks and queues with linked lists.
 
 LL Cons:
-+ Since each element holds a value and a pointer, it's more memory intensive.
-+ You have to access nodes sequentially since that's how they're defined; furthermore they're not stored continuously so it takes longer to access an element. 
-+ With a singly-linked list it's pretty much terrible to reverse traverse. Doubly-linked lists contain a pointer to the previous node as well but that's even more memory intensive. 
+
+- Since each element holds a value and a pointer, it's more memory intensive.
+
+- You have to access nodes sequentially since that's how they're defined; furthermore they're not stored continuously so it takes longer to access an element. 
+
+- With a singly-linked list it's pretty much terrible to reverse traverse. Doubly-linked lists contain a pointer to the previous node as well but that's even more memory intensive. 
 
 ###Ruby Implementation
 
-It makes to 
+It makes sense to define two ruby classes
