@@ -40,14 +40,56 @@ Here is the first. Note that a Node is initialized with its own data point as we
 
 ```ruby
 class Node
-
-	attr_accessor :datum, :next
+	attr_accessor :val, :next
 
 	def initialize(val, next_node)
-		@datum = val
+		@val = val
 		@next = next_node
 	end
+end
+```
+Next, the LinkedList class:
 
+```ruby
+class LinkedList
+
+  def initialize(val)
+    @head = Node.new(val, nil)
+  end
+
+  def add(val)
+    current = @head
+    while current.next != nil
+      current = current.next
+    end
+    current.next = Node.new(val, nil)
+  end
+
+  def delete(val)
+    current.next = @head
+    if current.val = val
+      @head = current.next
+    else
+      while (current.next != nil) && (current.next.val != val)
+        current = current.next
+      end
+      unless current.next == nil
+        current.next = current.next.next
+      end
+    end
+  end
+
+  def return_list
+    elements = []
+    current = @head
+    while current.next != nil
+      elements << current
+      current = current.next
+    end
+    elements << current
+  end
 end
 
 ```
+
+And there you have it - a basic implementation of a singly linked list in Ruby. Next time we'll use a linked list to build a stack and a queue. 
