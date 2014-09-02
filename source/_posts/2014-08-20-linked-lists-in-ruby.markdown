@@ -34,4 +34,20 @@ LL Cons:
 
 ###Ruby Implementation
 
-It makes sense to define two ruby classes
+It makes sense to define two ruby classes in implementing a linked list in Ruby - one for each element, called `Node`, and the other for the list itself, called `LinkedList`.
+
+Here is the first. Note that a Node is initialized with its own data point as well as a pointer to the next Node.
+
+```ruby
+class Node
+
+	attr_accessor :datum, :next
+
+	def initialize(val, next_node)
+		@datum = val
+		@next = next_node
+	end
+
+end
+
+```
