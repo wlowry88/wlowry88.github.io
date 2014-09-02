@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: lists | The Eternal Whitebelt]]></title>
+  <link href="http://wlowry88.github.io/blog/categories/lists/atom.xml" rel="self"/>
+  <link href="http://wlowry88.github.io/"/>
+  <updated>2014-09-01T19:03:51-07:00</updated>
+  <id>http://wlowry88.github.io/</id>
+  <author>
+    <name><![CDATA[Will Lowry]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linked Lists in Ruby]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby/"/>
+    <updated>2014-08-20T20:51:07-07:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby</id>
+    <content type="html"><![CDATA[<p>This post is centered around linked lists using Ruby.</p>
+
+<p>A linked list is a <strong>data structure</strong> that consists of a collection of nodes that represent a sequence. Each element in a linked list will contain a datum and a reference to the next element in the linked list (a pointer).</p>
+
+<p>In Ruby it makes most sense to use arrays due to built-in methods such as <code>shift</code>, <code>unshift</code>, <code>enq</code>, <code>deq</code>, <code>push</code> and <code>pop</code>, but it is helpful to know why linked lists can be beneficial. Linked lists' biggest advantage over arrays in other languages is their ability to insert / remove list elements without reallocating or reorganization of the entire data structure. Arrays have indices, so deleting a value at index 0 for example requires every single item to be reindexed.</p>
+
+<p>The flip-side of this, however, is that performing operations requiring access to particular elements of a linked list can be cumbersome. For example, finding the last element of a linked list requires scanning every element of the list.</p>
+
+<p>Here are some additional advantages and disadvantages of linked lists:</p>
+
+<p>LL Pros:</p>
+
+<ul>
+<li><p>Dynamic &ndash; LL&rsquo;s allocate the needed memory when the program is initiated and can can expand in real time without memory overload.</p></li>
+<li><p>Insertion and deletion is easy.</p></li>
+<li><p>It&rsquo;s easy to building linear data structures such as stacks and queues with linked lists.</p></li>
+</ul>
+
+
+<p>LL Cons:</p>
+
+<ul>
+<li><p>Since each element holds a value and a pointer, it&rsquo;s more memory intensive.</p></li>
+<li><p>You have to access nodes sequentially since that&rsquo;s how they&rsquo;re defined; furthermore they&rsquo;re not stored continuously so it takes longer to access an element.</p></li>
+<li><p>With a singly-linked list it&rsquo;s pretty much terrible to reverse traverse. Doubly-linked lists contain a pointer to the previous node as well but that&rsquo;s even more memory intensive.</p></li>
+</ul>
+
+
+<h3>Ruby Implementation</h3>
+
+<p>It makes sense to define two ruby classes in implementing a linked list in Ruby &ndash; one for each element, called <code>Node</code>, and the other for the list itself, called <code>LinkedList</code>.</p>
+
+<p>Here is the first. Note that a Node is initialized with its own data point as well as a pointer to the next Node.</p>
+
+<p>```ruby
+class Node</p>
+
+<pre><code>attr_accessor :val, :next
+
+def initialize(val, next_node)
+    @val = val
+    @next = next_node
+end
+</code></pre>
+
+<p>end
+```
+Next, the LinkedList class:</p>
+
+<p>```ruby
+class LinkedList</p>
+
+<p>  def initialize(val)</p>
+
+<pre><code>@head = Node.new(val, nil)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def add(val)</p>
+
+<pre><code>current = @head
+while current.next != nil
+  current = current.next
+end
+current.next = Node.new(val, nil)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def delete(val)</p>
+
+<pre><code>current.next = @head
+if current.val = val
+  @head = current.next
+else
+  while (current.next != nil) &amp;&amp; (current.next.val != val)
+    current = current.next
+  end
+  unless current.next == nil
+    current.next = current.next.next
+  end
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  def return_list</p>
+
+<pre><code>elements = []
+current = @head
+while current.next != nil
+  elements &lt;&lt; current
+  current = current.next
+end
+elements &lt;&lt; current
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>```</p>
+
+<p>And there you have it &ndash; a basic implementation of a singly linked list in Ruby. Next time we&rsquo;ll use a linked list to build a stack and a queue.</p>
+]]></content>
+  </entry>
+  
+</feed>
