@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://wlowry88.github.io/blog/2014/09/08/public/</loc>
+    <lastmod>2014-09-08T17:33:02-07:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby/</loc>
     <lastmod>2014-08-20T20:51:07-07:00</lastmod>
     <priority>0.8</priority>
@@ -53,35 +59,35 @@
   
   <url>
     <loc>http://wlowry88.github.io/archives/</loc>
-    <lastmod>2014-09-01T19:03:51-07:00</lastmod>
+    <lastmod>2014-09-08T18:27:47-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://wlowry88.github.io/blog/</loc>
-    <lastmod>2014-09-01T19:03:51-07:00</lastmod>
+    <lastmod>2014-09-08T18:27:47-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://wlowry88.github.io/</loc>
-    <lastmod>2014-09-01T19:03:51-07:00</lastmod>
+    <lastmod>2014-09-08T18:27:47-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://wlowry88.github.io/blog/archives/</loc>
-    <lastmod>2014-09-01T19:03:51-07:00</lastmod>
+    <lastmod>2014-09-08T18:27:47-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://wlowry88.github.io/about/</loc>
-    <lastmod>2014-09-01T19:03:51-07:00</lastmod>
+    <lastmod>2014-09-08T18:27:47-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

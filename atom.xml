@@ -4,7 +4,7 @@
   <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-09-01T19:03:51-07:00</updated>
+  <updated>2014-09-08T18:27:47-07:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -12,6 +12,184 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Public and Private Methods in Ruby]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/09/08/public/"/>
+    <updated>2014-09-08T17:33:02-07:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/09/08/public</id>
+    <content type="html"><![CDATA[<h3>Method Access Rules</h3>
+
+<p>While the end user of your program is never going to be using the methods you define in a class directly, it is still helpful to control access to your methods. Envision a team situation in which multiple developers use instances of the same class; it is useful to control which methods can be used.</p>
+
+<p>A simple way to think about the difference is to imagine our class is an airplane (I&rsquo;m writing this aboard one, in fact.)</p>
+
+<!-- More -->
+
+
+<h3>Public Methods</h3>
+
+<p>In our <code>Plane</code> class, we have a few public instance methods. We don&rsquo;t need to specify that a method be public because that is their default.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Plane</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_reader</span> <span class="ss">:type</span><span class="p">,</span> <span class="ss">:fuel</span><span class="p">,</span> <span class="ss">:landed</span><span class="p">,</span> <span class="ss">:people</span><span class="p">,</span> <span class="ss">:personal_info_of_passengers</span><span class="p">,</span> <span class="ss">:burning_fuel</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@model</span> <span class="o">=</span> <span class="n">model</span>
+</span><span class='line'>      <span class="vi">@fuel</span> <span class="o">=</span> <span class="mi">100</span>
+</span><span class='line'>      <span class="vi">@airborne</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>      <span class="vi">@burning_fuel</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">take_off</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;Firing up engines&quot;</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;Fuel levels are </span><span class="si">#{</span><span class="n">fuel</span><span class="si">}</span><span class="s2">.&quot;</span>
+</span><span class='line'>      <span class="vi">@airborne</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>      <span class="n">fire_up_engine</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">def</span> <span class="nf">fire_up_engine</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;firing up the engine&quot;</span>
+</span><span class='line'>      <span class="n">begin_gas_combustion</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">begin_gas_combustion</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;combustin&#39; the gas!&quot;</span>
+</span><span class='line'>      <span class="n">burning_fuel</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">personal_info_of_passengers</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">people</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">person</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">person</span><span class="o">.</span><span class="n">social_security_number</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>    
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Woah, wait a second. It&rsquo;s all well and good that we&rsquo;re able to see what type of plane we&rsquo;re working with, the fuel levels, and even whether or not we&rsquo;re airborne. However, there are a few things that we definitely don&rsquo;t want to be usable outside our class.</p>
+
+<p>An object is easy to think about as something that does tasks for you, and its methods are the actions of doing those things. Public methods are like the API &ndash; where calls are made to the instances of the object. Private methods, on the other hand, are tasks that you might not want to be used freely. For example, the method <code>begin_gas_combustion</code> is a component of the method <code>fire_up_engine</code> but it&rsquo;s unclear whether or not you&rsquo;d want to use it in any other context. In fact, it would probably be unsafe to be able to use it in other contexts. Luckily, Ruby enables use of private methods to get around this problem.</p>
+
+<h3>Private Methods</h3>
+
+<p><strong>A private method cannot be called with an explicit receiver.</strong> This means that if we specify <code>begin_gas_combustion</code> to be a private method, we shouldn&rsquo;t be able to call <code>begin_gas_combustion</code> on instances of our <code>Plane</code> class explicitly. Let&rsquo;s rewrite a bit of our Plane class:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Plane</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">fire_up_engine</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;firing up the engine&quot;</span>
+</span><span class='line'>      <span class="n">begin_gas_combustion</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  
+</span><span class='line'>      <span class="k">def</span> <span class="nf">begin_gas_combustion</span>
+</span><span class='line'>          <span class="s2">&quot;combustin&#39; da gas!&quot;</span>
+</span><span class='line'>          <span class="n">burning_fuel</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, that seems to make a bit more sense. Let&rsquo;s test out our methods.
+If you try, you&rsquo;ll get the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">wills_plane</span> <span class="o">=</span> <span class="no">Plane</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">747</span><span class="p">)</span>
+</span><span class='line'><span class="n">wills_plane</span><span class="o">.</span><span class="n">begin_gas_combustion</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; &#39;&lt;main&gt;&#39;: private method &#39;begin_gas_combustion&#39; called for #&lt;Plane:0x00000002aeae50&gt; (NoMethodError)`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+This makes sense based on our definition of private methods &ndash; the instance <code>will</code> is now the explicit receiver of the method as called. However, when we try the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">wills_plane</span><span class="o">.</span><span class="n">fire_up_engine</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; &quot;firing up the engine&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;combustin&#39; da gas!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here, since the method gets called within a public method, there is an implicit receiver &ndash; the specific instance of the object &ndash; and we are ok.</p>
+
+<h3>Private Setter (=) Methods</h3>
+
+<p>Private methods with the &ldquo;no explicit receiver&rdquo; rule do hit problems, however, with writer / setter methods. In these methods, you can&rsquo;t use the implicit receiver because Ruby would assume you were using a local variable instead of a method without the keyword <code>self</code>. Therefore, there is an exception &ndash; Ruby doesn&rsquo;t apply the rule to setter methods as long as the explicit receiver is <code>self</code>.</p>
+
+<h3>You Can Bypass Private Methods with &lsquo;send&rsquo;</h3>
+
+<p>Ruby has given us a way to get around our rule, however. You can always just use the <code>send</code> method to send any method to any object.</p>
+
+<p>Hopefully this clears up the value / usage of private methods, and see you next time.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linked Lists in Ruby]]></title>
