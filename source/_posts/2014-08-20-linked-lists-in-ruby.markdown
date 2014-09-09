@@ -10,7 +10,11 @@ This post is centered around linked lists using Ruby.
 
 A linked list is a **data structure** that consists of a collection of nodes that represent a sequence. Each element in a linked list will contain a datum and a reference to the next element in the linked list (a pointer).
 
-In Ruby it makes most sense to use arrays due to built-in methods such as `shift`, `unshift`, `enq`, `deq`, `push` and `pop`, but it is helpful to know why linked lists can be beneficial. Linked lists' biggest advantage over arrays in other languages is their ability to insert / remove list elements without reallocating or reorganization of the entire data structure. Arrays have indices, so deleting a value at index 0 for example requires every single item to be reindexed.
+In Ruby it makes most sense to use arrays due to built-in methods such as `shift`, `unshift`, `enq`, `deq`, `push` and `pop`, but it is helpful to know why linked lists can be beneficial.
+
+<!-- More -->
+
+Linked lists' biggest advantage over arrays in other languages is their ability to insert / remove list elements without reallocating or reorganization of the entire data structure. Arrays have indices, so deleting a value at index 0 for example requires every single item to be reindexed.
 
 The flip-side of this, however, is that performing operations requiring access to particular elements of a linked list can be cumbersome. For example, finding the last element of a linked list requires scanning every element of the list. 
 
