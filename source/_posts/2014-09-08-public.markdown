@@ -1,16 +1,16 @@
 ---
 layout: post
-title: "Public, Private, and Protected Methods in Ruby"
+title: "Public and Private Methods in Ruby"
 date: 2014-09-08 17:33:02 -0700
 comments: true
-categories: Ruby Language Public Private Protected Methods
+categories: Ruby Language Public Private Methods
 ---
 
 ###Method Access Rules
 
 While the end user of your program is never going to be using the methods you define in a class directly, it is still helpful to control access to your methods. Envision a team situation in which multiple developers use instances of the same class; it is useful to control which methods can be used.
 
-A simple way to think about the 3 types of access - public, private, or protected - might be on a plane (I'm writing this aboard one, in fact.)
+A simple way to think about the difference is to imagine our class is an airplane (I'm writing this aboard one, in fact.)
 
 <!-- More -->
 
@@ -78,6 +78,7 @@ class Plane
 			"combustin' da gas!"
 			burning_fuel = true
 		end
+
 end
 ```
 Ok, that seems to make a bit more sense. Let's test out our methods. 
@@ -100,5 +101,13 @@ wills_plane.fire_up_engine
 ```
 Here, since the method gets called within a public method, there is an implicit receiver - the specific instance of the object - and we are ok. 
 
+###Private Setter (=) Methods
+
+Private methods with the "no explicit receiver" rule do hit problems, however, with writer / setter methods. In these methods, you can't use the implicit receiver because Ruby would assume you were using a local variable instead of a method without the keyword `self`. Therefore, there is an exception - Ruby doesn't apply the rule to setter methods as long as the explicit receiver is `self`.
+
+###You Can Bypass Private Methods with 'send'
+Ruby has given us a way to get around our rule, however. You can always just use the `send` method to send any method to any object. 
+
+Hopefully this clears up the value / usage of private methods, and see you next time.
 
 
