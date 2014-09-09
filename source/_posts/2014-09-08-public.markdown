@@ -60,7 +60,7 @@ Woah, wait a second. It's all well and good that we're able to see what type of 
 An object is easy to think about as something that does tasks for you, and its methods are the actions of doing those things. Public methods are like the API - where calls are made to the instances of the object. Private methods, on the other hand, are tasks that you might not want to be used freely. For example, the method `begin_gas_combustion` is a component of the method `fire_up_engine` but it's unclear whether or not you'd want to use it in any other context. In fact, it would probably be unsafe to be able to use it in other contexts. Luckily, Ruby enables use of private methods to get around this problem.
 
 ###Private Methods
-A private method is defined as a method that cannot be called with an explicit receiver. This means that if we specify `begin_gas_combustion` to be a private method, we shouldn't be able to call `begin_gas_combustion` on instances of our `Plane` class explicitly. Let's rewrite a bit of our Plane class:
+**A private method cannot be called with an explicit receiver.** This means that if we specify `begin_gas_combustion` to be a private method, we shouldn't be able to call `begin_gas_combustion` on instances of our `Plane` class explicitly. Let's rewrite a bit of our Plane class:
 
 ```ruby
 class Plane
@@ -75,14 +75,30 @@ class Plane
 	private
 	
 		def begin_gas_combustion
+			"combustin' da gas!"
 			burning_fuel = true
 		end
 end
 ```
 Ok, that seems to make a bit more sense. Let's test out our methods. 
 If you try, you'll get the following:
+```ruby
 
-`'<main>': private method 'begin_gas_combustion' called for #<Plane:0x00000002aeae50> (NoMethodError)`
+wills_plane = Plane.new(747)
+wills_plane.begin_gas_combustion
+
+#=> '<main>': private method 'begin_gas_combustion' called for #<Plane:0x00000002aeae50> (NoMethodError)`
+``` 
+This makes sense based on our definition of private methods - the instance `will` is now the explicit receiver of the method as called. However, when we try the following:
+
+```ruby
+
+wills_plane.fire_up_engine
+
+#=> "firing up the engine"
+#=> "combustin' da gas!"
+```
+Here, since the method gets called within a public method, there is an implicit receiver - the specific instance of the object - and we are ok. 
 
 
 
