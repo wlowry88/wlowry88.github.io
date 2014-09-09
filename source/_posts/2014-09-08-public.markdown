@@ -1,0 +1,54 @@
+---
+layout: post
+title: "Public, Private, and Protected Methods in Ruby"
+date: 2014-09-08 17:33:02 -0700
+comments: true
+categories: Ruby Language Public Private Protected Methods
+---
+
+###Method Access Rules
+
+While the end user of your program is never going to be using the methods you define in a class directly, it is still helpful to control access to your methods. Envision a team situation in which multiple developers use instances of the same class; it is useful to control which methods can be used.
+
+A simple way to think about the 3 types of access - public, private, or protected - might be on a plane (I'm writing this aboard one, in fact.)
+
+<!-- More -->
+
+###Public Methods
+
+In our `Plane` class, we have a few public instance methods. We don't need to specify that a method be public because that is their default.
+
+```ruby
+class Plane
+
+	attr_reader :type, :fuel, :landed, :people, :personal_info_of_passengers
+
+	def initialize(model)
+		@model = model
+		@fuel = 100
+		@airborne = false
+	end
+
+	def take_off
+		puts "Firing up engines"
+		puts "Fuel levels are #{fuel}."
+		@airborne = true
+		fire_up_engine
+	end
+	
+	def fire_up_engine
+		begin_gas_combustion
+	end
+
+	def personal_info_of_passengers(people)
+		people.map do |person|
+			person.social_security_number
+		end
+	end
+
+		
+```
+Woah, wait a second. It's all well and good that we're able to see what type of plane we're working with, the fuel levels, and even whether or not we're airborne. However, there are a few things that we definitely don't want to be usable outside our class.
+
+###Private Methods
+An object is easy to think about as something that does tasks for you, and its methods are the actions of doing those things. 
