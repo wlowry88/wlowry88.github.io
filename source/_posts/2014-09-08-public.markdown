@@ -21,12 +21,13 @@ In our `Plane` class, we have a few public instance methods. We don't need to sp
 ```ruby
 class Plane
 
-	attr_reader :type, :fuel, :landed, :people, :personal_info_of_passengers
+	attr_reader :type, :fuel, :landed, :people, :personal_info_of_passengers, :burning_fuel
 
 	def initialize(model)
 		@model = model
 		@fuel = 100
 		@airborne = false
+		@burning_fuel = false
 	end
 
 	def take_off
@@ -37,7 +38,13 @@ class Plane
 	end
 	
 	def fire_up_engine
+		puts "firing up the engine"
 		begin_gas_combustion
+	end
+
+	def begin_gas_combustion
+		puts "combustin' the gas!"
+		burning_fuel = true
 	end
 
 	def personal_info_of_passengers(people)
@@ -46,9 +53,36 @@ class Plane
 		end
 	end
 
-		
+end	
 ```
 Woah, wait a second. It's all well and good that we're able to see what type of plane we're working with, the fuel levels, and even whether or not we're airborne. However, there are a few things that we definitely don't want to be usable outside our class.
 
+An object is easy to think about as something that does tasks for you, and its methods are the actions of doing those things. Public methods are like the API - where calls are made to the instances of the object. Private methods, on the other hand, are tasks that you might not want to be used freely. For example, the method `begin_gas_combustion` is a component of the method `fire_up_engine` but it's unclear whether or not you'd want to use it in any other context. In fact, it would probably be unsafe to be able to use it in other contexts. Luckily, Ruby enables use of private methods to get around this problem.
+
 ###Private Methods
-An object is easy to think about as something that does tasks for you, and its methods are the actions of doing those things. 
+A private method is defined as a method that cannot be called with an explicit receiver. This means that if we specify `begin_gas_combustion` to be a private method, we shouldn't be able to call `begin_gas_combustion` on instances of our `Plane` class explicitly. Let's rewrite a bit of our Plane class:
+
+```ruby
+class Plane
+
+...
+
+	def fire_up_engine
+		puts "firing up the engine"
+		begin_gas_combustion
+	end
+
+	private
+	
+		def begin_gas_combustion
+			burning_fuel = true
+		end
+end
+```
+Ok, that seems to make a bit more sense. Let's test out our methods. 
+If you try, you'll get the following:
+
+`'<main>': private method 'begin_gas_combustion' called for #<Plane:0x00000002aeae50> (NoMethodError)`
+
+
+
