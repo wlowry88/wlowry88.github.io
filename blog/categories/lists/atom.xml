@@ -4,7 +4,7 @@
   <title><![CDATA[Category: lists | The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/blog/categories/lists/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-09-08T18:27:47-07:00</updated>
+  <updated>2014-09-16T17:58:30-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -16,13 +16,18 @@
   <entry>
     <title type="html"><![CDATA[Linked Lists in Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby/"/>
-    <updated>2014-08-20T20:51:07-07:00</updated>
+    <updated>2014-08-20T23:51:07-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby</id>
     <content type="html"><![CDATA[<p>This post is centered around linked lists using Ruby.</p>
 
 <p>A linked list is a <strong>data structure</strong> that consists of a collection of nodes that represent a sequence. Each element in a linked list will contain a datum and a reference to the next element in the linked list (a pointer).</p>
 
-<p>In Ruby it makes most sense to use arrays due to built-in methods such as <code>shift</code>, <code>unshift</code>, <code>enq</code>, <code>deq</code>, <code>push</code> and <code>pop</code>, but it is helpful to know why linked lists can be beneficial. Linked lists' biggest advantage over arrays in other languages is their ability to insert / remove list elements without reallocating or reorganization of the entire data structure. Arrays have indices, so deleting a value at index 0 for example requires every single item to be reindexed.</p>
+<p>In Ruby it makes most sense to use arrays due to built-in methods such as <code>shift</code>, <code>unshift</code>, <code>enq</code>, <code>deq</code>, <code>push</code> and <code>pop</code>, but it is helpful to know why linked lists can be beneficial.</p>
+
+<!-- More -->
+
+
+<p>Linked lists' biggest advantage over arrays in other languages is their ability to insert / remove list elements without reallocating or reorganization of the entire data structure. Arrays have indices, so deleting a value at index 0 for example requires every single item to be reindexed.</p>
 
 <p>The flip-side of this, however, is that performing operations requiring access to particular elements of a linked list can be cumbersome. For example, finding the last element of a linked list requires scanning every element of the list.</p>
 

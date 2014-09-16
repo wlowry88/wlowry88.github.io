@@ -102,6 +102,49 @@ $(document).ready(
     <article class="post">
 	<h2 class="title">
 		
+		<a href="/blog/2014/09/16/python-from-ruby/">
+		
+			Python From Ruby</a>
+	</h2>
+	<div class="entry-content">
+		<p>Recently, I&rsquo;ve been learning a lot more about Python. I&rsquo;m a Rubyist by background but I&rsquo;m interested in learning Python because of all it&rsquo;s amazing libraries, especially those related to data science. This post is about a few differences that are useful to think about coming from a Ruby background. This is also largely a reaction to material I&rsquo;ve gathered from the web, including <a href="http://stackoverflow.com/questions/4769004/learning-python-from-ruby-differences-and-similarities">this</a> thread on Stack Overflow.</p>
+
+
+		
+		<a href="/blog/2014/09/16/python-from-ruby/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-16T16:34:09-04:00" pubdate data-updated="true">Sep 16<sup>th</sup>, 2014</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/languages/'>languages</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+
+</div>
+
+
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
 		<a href="/blog/2014/09/08/public/">
 		
 			Public and Private Methods in Ruby</a>
@@ -132,7 +175,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-09-08T17:33:02-07:00" pubdate data-updated="true">Sep 8<sup>th</sup>, 2014</time></div>
+<time datetime="2014-09-08T20:33:02-04:00" pubdate data-updated="true">Sep 8<sup>th</sup>, 2014</time></div>
 	
 
 <div class="tags">
@@ -158,140 +201,11 @@ $(document).ready(
 
 <p>A linked list is a <strong>data structure</strong> that consists of a collection of nodes that represent a sequence. Each element in a linked list will contain a datum and a reference to the next element in the linked list (a pointer).</p>
 
-<p>In Ruby it makes most sense to use arrays due to built-in methods such as <code>shift</code>, <code>unshift</code>, <code>enq</code>, <code>deq</code>, <code>push</code> and <code>pop</code>, but it is helpful to know why linked lists can be beneficial. Linked lists&#8217; biggest advantage over arrays in other languages is their ability to insert / remove list elements without reallocating or reorganization of the entire data structure. Arrays have indices, so deleting a value at index 0 for example requires every single item to be reindexed.</p>
+<p>In Ruby it makes most sense to use arrays due to built-in methods such as <code>shift</code>, <code>unshift</code>, <code>enq</code>, <code>deq</code>, <code>push</code> and <code>pop</code>, but it is helpful to know why linked lists can be beneficial.</p>
 
-<p>The flip-side of this, however, is that performing operations requiring access to particular elements of a linked list can be cumbersome. For example, finding the last element of a linked list requires scanning every element of the list.</p>
-
-<p>Here are some additional advantages and disadvantages of linked lists:</p>
-
-<p>LL Pros:</p>
-
-<ul>
-<li><p>Dynamic &ndash; LL&rsquo;s allocate the needed memory when the program is initiated and can can expand in real time without memory overload.</p></li>
-<li><p>Insertion and deletion is easy.</p></li>
-<li><p>It&rsquo;s easy to building linear data structures such as stacks and queues with linked lists.</p></li>
-</ul>
-
-
-<p>LL Cons:</p>
-
-<ul>
-<li><p>Since each element holds a value and a pointer, it&rsquo;s more memory intensive.</p></li>
-<li><p>You have to access nodes sequentially since that&rsquo;s how they&rsquo;re defined; furthermore they&rsquo;re not stored continuously so it takes longer to access an element.</p></li>
-<li><p>With a singly-linked list it&rsquo;s pretty much terrible to reverse traverse. Doubly-linked lists contain a pointer to the previous node as well but that&rsquo;s even more memory intensive.</p></li>
-</ul>
-
-
-<h3>Ruby Implementation</h3>
-
-<p>It makes sense to define two ruby classes in implementing a linked list in Ruby &ndash; one for each element, called <code>Node</code>, and the other for the list itself, called <code>LinkedList</code>.</p>
-
-<p>Here is the first. Note that a Node is initialized with its own data point as well as a pointer to the next Node.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Node</span>
-</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:val</span><span class="p">,</span> <span class="ss">:next</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">next_node</span><span class="p">)</span>
-</span><span class='line'>      <span class="vi">@val</span> <span class="o">=</span> <span class="n">val</span>
-</span><span class='line'>      <span class="vi">@next</span> <span class="o">=</span> <span class="n">next_node</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next, the LinkedList class:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">LinkedList</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@head</span> <span class="o">=</span> <span class="no">Node</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="kp">nil</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">current</span> <span class="o">=</span> <span class="vi">@head</span>
-</span><span class='line'>    <span class="k">while</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="kp">nil</span>
-</span><span class='line'>      <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="no">Node</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="kp">nil</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="vi">@head</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">current</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
-</span><span class='line'>      <span class="vi">@head</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="k">while</span> <span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="kp">nil</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">val</span> <span class="o">!=</span> <span class="n">val</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="k">unless</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">==</span> <span class="kp">nil</span>
-</span><span class='line'>        <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">return_list</span>
-</span><span class='line'>    <span class="n">elements</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'>    <span class="n">current</span> <span class="o">=</span> <span class="vi">@head</span>
-</span><span class='line'>    <span class="k">while</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="kp">nil</span>
-</span><span class='line'>      <span class="n">elements</span> <span class="o">&lt;&lt;</span> <span class="n">current</span>
-</span><span class='line'>      <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">elements</span> <span class="o">&lt;&lt;</span> <span class="n">current</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And there you have it &ndash; a basic implementation of a singly linked list in Ruby. Next time we&rsquo;ll use a linked list to build a stack and a queue.</p>
 
 		
-		
+		<a href="/blog/2014/08/20/linked-lists-in-ruby/" class="more-link">Read on &rarr;</a>
 	</div>
 
 
@@ -308,7 +222,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-08-20T20:51:07-07:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time></div>
+<time datetime="2014-08-20T23:51:07-04:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time></div>
 	
 
 <div class="tags">
@@ -351,7 +265,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-08-06T18:35:02-07:00" pubdate data-updated="true">Aug 6<sup>th</sup>, 2014</time></div>
+<time datetime="2014-08-06T21:35:02-04:00" pubdate data-updated="true">Aug 6<sup>th</sup>, 2014</time></div>
 	
 
 
@@ -388,7 +302,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-08-02T20:06:27-07:00" pubdate data-updated="true">Aug 2<sup>nd</sup>, 2014</time></div>
+<time datetime="2014-08-02T23:06:27-04:00" pubdate data-updated="true">Aug 2<sup>nd</sup>, 2014</time></div>
 	
 
 
@@ -429,7 +343,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-07-28T19:02:31-07:00" pubdate data-updated="true">Jul 28<sup>th</sup>, 2014</time></div>
+<time datetime="2014-07-28T22:02:31-04:00" pubdate data-updated="true">Jul 28<sup>th</sup>, 2014</time></div>
 	
 
 
@@ -466,7 +380,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-07-13T16:25:44-07:00" pubdate data-updated="true">Jul 13<sup>th</sup>, 2014</time></div>
+<time datetime="2014-07-13T19:25:44-04:00" pubdate data-updated="true">Jul 13<sup>th</sup>, 2014</time></div>
 	
 
 
@@ -503,7 +417,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-07-05T16:21:23-07:00" pubdate data-updated="true">Jul 5<sup>th</sup>, 2014</time></div>
+<time datetime="2014-07-05T19:21:23-04:00" pubdate data-updated="true">Jul 5<sup>th</sup>, 2014</time></div>
 	
 
 
@@ -542,7 +456,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-07-04T15:28:24-07:00" pubdate data-updated="true">Jul 4<sup>th</sup>, 2014</time></div>
+<time datetime="2014-07-04T18:28:24-04:00" pubdate data-updated="true">Jul 4<sup>th</sup>, 2014</time></div>
 	
 
 
@@ -579,7 +493,7 @@ $(document).ready(
   
 
 
-<time datetime="2014-07-04T14:13:09-07:00" pubdate data-updated="true">Jul 4<sup>th</sup>, 2014</time></div>
+<time datetime="2014-07-04T17:13:09-04:00" pubdate data-updated="true">Jul 4<sup>th</sup>, 2014</time></div>
 	
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-09-08T18:27:47-07:00</updated>
+  <updated>2014-09-16T17:58:30-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -14,9 +14,111 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Python from Ruby]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/09/16/python-from-ruby/"/>
+    <updated>2014-09-16T16:34:09-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/09/16/python-from-ruby</id>
+    <content type="html"><![CDATA[<p>Recently, I&rsquo;ve been learning a lot more about Python. I&rsquo;m a Rubyist by background but I&rsquo;m interested in learning Python because of all it&rsquo;s amazing libraries, especially those related to data science. This post is about a few differences that are useful to think about coming from a Ruby background. This is also largely a reaction to material I&rsquo;ve gathered from the web, including <a href="http://stackoverflow.com/questions/4769004/learning-python-from-ruby-differences-and-similarities">this</a> thread on Stack Overflow.</p>
+
+<!--More-->
+
+
+<h3>A Few Differences So Far</h3>
+
+<p><strong>Philosophy</strong>. It seems that Python and Ruby were conceived with slightly different aims. While both are high-level, interpreted, general programming languages, Python is very focused on being explicit. I only just learned about this easter egg in Python:</p>
+
+<p>```python</p>
+
+<blockquote><blockquote><blockquote><p>import this</p></blockquote></blockquote></blockquote>
+
+<p>&ldquo;&rdquo;&ldquo;The Zen of Python, by Tim Peters</p>
+
+<p>Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren&rsquo;t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one&mdash; and preferably only one &mdash;obvious way to do it.
+Although that way may not be obvious at first unless you&rsquo;re Dutch.
+Now is better than never.
+Although never is often better than <em>right</em> now.
+If the implementation is hard to explain, it&rsquo;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea &mdash; let&rsquo;s do more of those!&ldquo;&rdquo;&ldquo;
+```
+When I was learning Ruby, I remember being blown away by the number of ways to solve any given problem. Yukihiro Matsumoto, the creator of Ruby once said, "I hope to see Ruby help every programmer in the world to be productive, and to enjoy programming, and to be happy. That is the primary purpose of Ruby language.&rdquo; I don&rsquo;t know about you, but it seems pretty clear that Ruby is intended to be programmer-centric. If there are two Rubyists who choose to solve a problem two different ways, let them! This stands in sharp contrast to several items from the Python &ldquo;creed&rdquo; &ndash; especially &ldquo;There should be one&mdash; and preferably only one &mdash;obvious way to do it.&rdquo; Python is not programmer-centric, it&rsquo;s program-centric.</p>
+
+<p><strong>Ruby has blocks, Python does not.</strong></p>
+
+<p><strong>Python has functions, Ruby does not.</strong> In Python you can pass a function or method and pass it to another function, whereas in Ruby, everything is a method and you need to wrap them in Procs to pass them.</p>
+
+<p><strong>Scope/Closures</strong>. In Ruby, closures are defined using blocks &ndash; within a block you have full read and write access to variables defined outside the block. In Python, you can define functions inside of other functions but you don&rsquo;t have write access to variables from the outer function, only read access.</p>
+
+<p><strong>Python uses list comprehensions, which are pretty awesome.</strong> If you want to do an operation with a list, it&rsquo;s often easier in Python. For example, maybe you wanted to return a new list of all the square numbers of elements greater than 10, you could do this in Python:
+```python
+my_list = [1, 5, 9, 11, 12, 13]</p>
+
+<p>[x**2 for x in my_list if x > 10]</p>
+
+<h1>=> [121, 144, 169]</h1>
+
+<p><code>
+That's pretty expressive. In Ruby, the following would be a good solution but it's just less easy to read:
+</code>ruby
+my_list = [1, 5, 9, 11, 12, 13]</p>
+
+<p>my_list.select { |item| item > 10 }.collect { |value| value ** 2 }</p>
+
+<h1>=> [121, 144, 169]</h1>
+
+<p>```
+Obviously both work and return the same value &ndash; but Python does it in one pass instead of having to hold 3 arrays in memory.</p>
+
+<p><strong>Python has tuples, Ruby uses arrays to simulate tuples.</strong> Maybe someday soon I&rsquo;ll appreciate this difference.</p>
+
+<p><strong>Ruby has case statements, Python doesn&rsquo;t.</strong> I don&rsquo;t really care too much about this one.</p>
+
+<p><strong>Ruby has ternary operators, Python doesn&rsquo;t.</strong> require_ternary_operators_to_stay_sane?? Ruby : Python</p>
+
+<p><strong>Python has multiple inheritance, Ruby uses modules and mix-ins.</strong> This is actually pretty important, and I think I prefer the module approach.</p>
+
+<p><strong>Python only has single-line lambda functions.</strong> Ruby has a quasi-equivalent with the block, and so Ruby code becomes more functional as a result &ndash; I tend to gravitate towards the <code>each</code> and <code>map</code> methods in Ruby but definitely go more for the <code>for x in y</code> approach in Python. However, there is a nice equivalent for the <code>map</code> method in Python. Given a Python function, you can also do things functionally instead of with the list comprehension:</p>
+
+<p>```python
+def my_method(x):</p>
+
+<pre><code>    return x + 4
+</code></pre>
+
+<p>my_list = [1,2,3]</p>
+
+<p>map(my_method, my_list)</p>
+
+<h1>=> [5, 6, 7]</h1>
+
+<p>```</p>
+
+<p><strong>NumPy, SciPy, Scikit-learn</strong>. Python has really cool libraries for data science, which is what I might be interested in down the line.</p>
+
+<h3>Conclusion:</h3>
+
+<p>There&rsquo;s no winner here. They&rsquo;re both incredible languages and I&rsquo;m still a whitebelt in both. However, there&rsquo;s definitely value to learing both &ndash; they both teach slightly different ways of attacking problems, both have great web solutions (I think Rails still has Django beat right now), and both are a distinct pleasure to work with.</p>
+
+<p>Tata for now.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Public and Private Methods in Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/09/08/public/"/>
-    <updated>2014-09-08T17:33:02-07:00</updated>
+    <updated>2014-09-08T20:33:02-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/09/08/public</id>
     <content type="html"><![CDATA[<h3>Method Access Rules</h3>
 
@@ -135,13 +237,18 @@ Here, since the method gets called within a public method, there is an implicit 
   <entry>
     <title type="html"><![CDATA[Linked Lists in Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby/"/>
-    <updated>2014-08-20T20:51:07-07:00</updated>
+    <updated>2014-08-20T23:51:07-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby</id>
     <content type="html"><![CDATA[<p>This post is centered around linked lists using Ruby.</p>
 
 <p>A linked list is a <strong>data structure</strong> that consists of a collection of nodes that represent a sequence. Each element in a linked list will contain a datum and a reference to the next element in the linked list (a pointer).</p>
 
-<p>In Ruby it makes most sense to use arrays due to built-in methods such as <code>shift</code>, <code>unshift</code>, <code>enq</code>, <code>deq</code>, <code>push</code> and <code>pop</code>, but it is helpful to know why linked lists can be beneficial. Linked lists' biggest advantage over arrays in other languages is their ability to insert / remove list elements without reallocating or reorganization of the entire data structure. Arrays have indices, so deleting a value at index 0 for example requires every single item to be reindexed.</p>
+<p>In Ruby it makes most sense to use arrays due to built-in methods such as <code>shift</code>, <code>unshift</code>, <code>enq</code>, <code>deq</code>, <code>push</code> and <code>pop</code>, but it is helpful to know why linked lists can be beneficial.</p>
+
+<!-- More -->
+
+
+<p>Linked lists' biggest advantage over arrays in other languages is their ability to insert / remove list elements without reallocating or reorganization of the entire data structure. Arrays have indices, so deleting a value at index 0 for example requires every single item to be reindexed.</p>
 
 <p>The flip-side of this, however, is that performing operations requiring access to particular elements of a linked list can be cumbersome. For example, finding the last element of a linked list requires scanning every element of the list.</p>
 

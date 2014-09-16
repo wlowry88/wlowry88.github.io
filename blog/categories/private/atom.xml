@@ -4,7 +4,7 @@
   <title><![CDATA[Category: private | The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/blog/categories/private/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-09-08T18:27:47-07:00</updated>
+  <updated>2014-09-16T17:58:30-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Public and Private Methods in Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/09/08/public/"/>
-    <updated>2014-09-08T17:33:02-07:00</updated>
+    <updated>2014-09-08T20:33:02-04:00</updated>
     <id>http://wlowry88.github.io/blog/2014/09/08/public</id>
     <content type="html"><![CDATA[<h3>Method Access Rules</h3>
 
