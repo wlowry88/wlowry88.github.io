@@ -4,7 +4,7 @@
   <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-09-23T12:26:10-04:00</updated>
+  <updated>2014-09-23T12:28:13-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -105,15 +105,6 @@
 6) All unreachable executable code that follows an unavoidable return statement (where the function ends) will disappear from your answer.</p>
 
 <p>If you follow these steps you&rsquo;ll never get the dreaded UNDEFINED or ERRORs that keep your functions from running smoothly.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Assignment and Copying in Python]]></title>
-    <link href="http://wlowry88.github.io/blog/2014/09/17/assignment-and-copying-in-python/"/>
-    <updated>2014-09-17T14:54:19-04:00</updated>
-    <id>http://wlowry88.github.io/blog/2014/09/17/assignment-and-copying-in-python</id>
-    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
