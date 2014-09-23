@@ -4,7 +4,7 @@
   <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-09-16T17:58:30-04:00</updated>
+  <updated>2014-09-23T12:26:10-04:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -12,6 +12,110 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Foolproof Guide to Hoisting in Javascript]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/09/23/foolproof-guide-to-hoisting-in-javascript/"/>
+    <updated>2014-09-23T11:09:07-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/09/23/foolproof-guide-to-hoisting-in-javascript</id>
+    <content type="html"><![CDATA[<p>Javascript is often made fun of for its idiosynchrasies (if you haven&rsquo;t seen Gary Bernhardt&rsquo;s &ldquo;Wat&rdquo; talk, stop right now and watch it: <a href="http://vimeo.com/94881698">http://vimeo.com/94881698</a>). Today I want to focus on one issue that can cause problems in Javascript &ndash; hoisting.</p>
+
+<!--More-->
+
+
+<p>Whenever you open up a new scope in Javascript &ndash; for instance, when you&rsquo;re defining a new function- the first thing that happens is a clearing out of memory space for all variables, which it initializes as undefined. This concept can be strange because no matter what order your javascript variables and functions present themselves in your code, your variables will be defined first. So given the following Javascript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">bigOuterFunction</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">imWrittenFirst</span><span class="p">(){</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;but hoisted second&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">firstVariable</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The load order will actually look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">bigOuterFunction</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">firstVariable</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">imWrittenFirst</span><span class="p">(){</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;but hoisted second&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">firstVariable</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, declared functions are hoisted (by the way, this is a declared function:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">helloWorld</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hello, &quot;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">helloWorld</span><span class="p">(</span><span class="s2">&quot;Will&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">//=&gt; &quot;Hello, Will!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is a function expression (anonymous function):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">imAnonymous</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">print</span> <span class="s2">&quot;Hello, &quot;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">imAnonymous</span><span class="p">(</span><span class="s2">&quot;Will&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">//=&gt; &quot;Hello, Will!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is important to note the distinction between the two types of functions. Since the function expression was stored in a variable, the variable itself would be hoisted in step 1 and assigned as undefined. Then, it wouldn&rsquo;t be until <code>imAnonymous</code> is called that the anonymous functioned would be invoked.</p>
+
+<p>The third thing that happens is all of your executable code runs. This includes variable assignment. However, it&rsquo;s easier to explain in terms of a simple list.</p>
+
+<p>1) All declared variables are first manually initialized to an undefinedvalue and come first in the load order.
+2) All loaded functions that end up being overwritten by other functions with the same name will just disappear from their current place in the load order.
+3) Declared functions that end up replacing other functions, however, will NOT take the order place of the previous version, but instead will just fall into the load order behind existing loaded functions.
+4) All declared variables receiving either new values or function expression assignments will lose the var keyword in the executable code portion of your answer (since they will already be declared through criteria 1).
+5) Any function expression assignment is treated here as executable code, and does not change the load order of declared functions in your answer, even if they later replace that function.
+6) All unreachable executable code that follows an unavoidable return statement (where the function ends) will disappear from your answer.</p>
+
+<p>If you follow these steps you&rsquo;ll never get the dreaded UNDEFINED or ERRORs that keep your functions from running smoothly.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Assignment and Copying in Python]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/09/17/assignment-and-copying-in-python/"/>
+    <updated>2014-09-17T14:54:19-04:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/09/17/assignment-and-copying-in-python</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python from Ruby]]></title>
