@@ -51,10 +51,15 @@ It is important to note the distinction between the two types of functions. Sinc
 The third thing that happens is all of your executable code runs. This includes variable assignment. However, it's easier to explain in terms of a simple list.
 
 1) All declared variables are first manually initialized to an undefinedvalue and come first in the load order.
+
 2) All loaded functions that end up being overwritten by other functions with the same name will just disappear from their current place in the load order.
+
 3) Declared functions that end up replacing other functions, however, will NOT take the order place of the previous version, but instead will just fall into the load order behind existing loaded functions.
+
 4) All declared variables receiving either new values or function expression assignments will lose the var keyword in the executable code portion of your answer (since they will already be declared through criteria 1).
+
 5) Any function expression assignment is treated here as executable code, and does not change the load order of declared functions in your answer, even if they later replace that function.
+
 6) All unreachable executable code that follows an unavoidable return statement (where the function ends) will disappear from your answer.
 
 If you follow these steps you'll never get the dreaded UNDEFINED or ERRORs that keep your functions from running smoothly.
