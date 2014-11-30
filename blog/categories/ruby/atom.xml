@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-09-23T12:32:20-04:00</updated>
+  <updated>2014-11-29T16:20:43-08:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -14,9 +14,20 @@
 
   
   <entry>
+    <title type="html"><![CDATA[A Codeschool [every other] 'Day [or so] Keeps the Doctor Away]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/11/29/a-codeschool-a-day-keeps-the-doctor-away/"/>
+    <updated>2014-11-29T16:11:44-08:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/11/29/a-codeschool-a-day-keeps-the-doctor-away</id>
+    <content type="html"><![CDATA[<p>The title says it all. I&rsquo;m going to try and get through all of the Ruby, Rails, and Javascript code school tutorials in the next month. Why? Because it was &ldquo;free&rdquo; along with the Flatiron School tuition (definitely not free either) and I might as well get the most of it before it&rsquo;s taken away.</p>
+
+<p>Let&rsquo;s see how it goes &ndash; I think it can be done.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Python from Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/09/16/python-from-ruby/"/>
-    <updated>2014-09-16T16:34:09-04:00</updated>
+    <updated>2014-09-16T13:34:09-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/09/16/python-from-ruby</id>
     <content type="html"><![CDATA[<p>Recently, I&rsquo;ve been learning a lot more about Python. I&rsquo;m a Rubyist by background but I&rsquo;m interested in learning Python because of all it&rsquo;s amazing libraries, especially those related to data science. This post is about a few differences that are useful to think about coming from a Ruby background. This is also largely a reaction to material I&rsquo;ve gathered from the web, including <a href="http://stackoverflow.com/questions/4769004/learning-python-from-ruby-differences-and-similarities">this</a> thread on Stack Overflow.</p>
 
@@ -118,7 +129,7 @@ def my_method(x):</p>
   <entry>
     <title type="html"><![CDATA[Public and Private Methods in Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/09/08/public/"/>
-    <updated>2014-09-08T20:33:02-04:00</updated>
+    <updated>2014-09-08T17:33:02-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/09/08/public</id>
     <content type="html"><![CDATA[<h3>Method Access Rules</h3>
 
@@ -237,7 +248,7 @@ Here, since the method gets called within a public method, there is an implicit 
   <entry>
     <title type="html"><![CDATA[Linked Lists in Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby/"/>
-    <updated>2014-08-20T23:51:07-04:00</updated>
+    <updated>2014-08-20T20:51:07-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby</id>
     <content type="html"><![CDATA[<p>This post is centered around linked lists using Ruby.</p>
 

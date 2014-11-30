@@ -4,7 +4,7 @@
   <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-09-23T12:32:20-04:00</updated>
+  <updated>2014-11-29T16:20:43-08:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -14,9 +14,20 @@
 
   
   <entry>
+    <title type="html"><![CDATA[A Codeschool [every other] 'Day [or so] Keeps the Doctor Away]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/11/29/a-codeschool-a-day-keeps-the-doctor-away/"/>
+    <updated>2014-11-29T16:11:44-08:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/11/29/a-codeschool-a-day-keeps-the-doctor-away</id>
+    <content type="html"><![CDATA[<p>The title says it all. I&rsquo;m going to try and get through all of the Ruby, Rails, and Javascript code school tutorials in the next month. Why? Because it was &ldquo;free&rdquo; along with the Flatiron School tuition (definitely not free either) and I might as well get the most of it before it&rsquo;s taken away.</p>
+
+<p>Let&rsquo;s see how it goes &ndash; I think it can be done.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Foolproof Guide to Hoisting in Javascript]]></title>
     <link href="http://wlowry88.github.io/blog/2014/09/23/foolproof-guide-to-hoisting-in-javascript/"/>
-    <updated>2014-09-23T11:09:07-04:00</updated>
+    <updated>2014-09-23T08:09:07-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/09/23/foolproof-guide-to-hoisting-in-javascript</id>
     <content type="html"><![CDATA[<p>Javascript is often made fun of for its idiosynchrasies (if you haven&rsquo;t seen Gary Bernhardt&rsquo;s &ldquo;Wat&rdquo; talk, stop right now and watch it: <a href="http://vimeo.com/94881698">http://vimeo.com/94881698</a>). Today I want to focus on one issue that can cause problems in Javascript &ndash; hoisting.</p>
 
@@ -116,7 +127,7 @@
   <entry>
     <title type="html"><![CDATA[Python from Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/09/16/python-from-ruby/"/>
-    <updated>2014-09-16T16:34:09-04:00</updated>
+    <updated>2014-09-16T13:34:09-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/09/16/python-from-ruby</id>
     <content type="html"><![CDATA[<p>Recently, I&rsquo;ve been learning a lot more about Python. I&rsquo;m a Rubyist by background but I&rsquo;m interested in learning Python because of all it&rsquo;s amazing libraries, especially those related to data science. This post is about a few differences that are useful to think about coming from a Ruby background. This is also largely a reaction to material I&rsquo;ve gathered from the web, including <a href="http://stackoverflow.com/questions/4769004/learning-python-from-ruby-differences-and-similarities">this</a> thread on Stack Overflow.</p>
 
@@ -258,7 +269,7 @@
   <entry>
     <title type="html"><![CDATA[Public and Private Methods in Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/09/08/public/"/>
-    <updated>2014-09-08T20:33:02-04:00</updated>
+    <updated>2014-09-08T17:33:02-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/09/08/public</id>
     <content type="html"><![CDATA[<h3>Method Access Rules</h3>
 
@@ -436,7 +447,7 @@ This makes sense based on our definition of private methods &ndash; the instance
   <entry>
     <title type="html"><![CDATA[Linked Lists in Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby/"/>
-    <updated>2014-08-20T23:51:07-04:00</updated>
+    <updated>2014-08-20T20:51:07-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/08/20/linked-lists-in-ruby</id>
     <content type="html"><![CDATA[<p>This post is centered around linked lists using Ruby.</p>
 
@@ -584,7 +595,7 @@ This makes sense based on our definition of private methods &ndash; the instance
   <entry>
     <title type="html"><![CDATA[A Taste Of Metaprogramming: Method_Missing]]></title>
     <link href="http://wlowry88.github.io/blog/2014/08/06/a-taste-of-metaprogramming-method-missing/"/>
-    <updated>2014-08-06T21:35:02-04:00</updated>
+    <updated>2014-08-06T18:35:02-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/08/06/a-taste-of-metaprogramming-method-missing</id>
     <content type="html"><![CDATA[<p>Anyone with a background in Ruby has seen a hash before. And anyone with a background in Javascript has seen a Javascript Object before. I encountered an interesting problem on CodeWars.com and wanted to share. The problem deals with accessing data in Ruby hashes the way you can in Javascript objects &ndash; by using the dot notation.</p>
 
@@ -683,7 +694,7 @@ hash.q # must return NoMethodError</p>
   <entry>
     <title type="html"><![CDATA[Google OAuth 2.0 Login in Rails 4]]></title>
     <link href="http://wlowry88.github.io/blog/2014/08/02/google-contacts-api-with-oauth-in-rails/"/>
-    <updated>2014-08-02T23:06:27-04:00</updated>
+    <updated>2014-08-02T20:06:27-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/08/02/google-contacts-api-with-oauth-in-rails</id>
     <content type="html"><![CDATA[<p>The process of logging in with Oauth may seem complex the first time you do it, but it becomes easier the second time around. This article assumes some familiarity with Ruby and the structure of a Rails application (but not too much :)</p>
 
@@ -838,7 +849,7 @@ hash.q # must return NoMethodError</p>
   <entry>
     <title type="html"><![CDATA[Pros and Cons of Turbolinks in Rails 4 Applications]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/28/pros-and-cons-of-turbolinks-in-rails-4-applications/"/>
-    <updated>2014-07-28T22:02:31-04:00</updated>
+    <updated>2014-07-28T19:02:31-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/28/pros-and-cons-of-turbolinks-in-rails-4-applications</id>
     <content type="html"><![CDATA[<p>Recently, I was playing around with jQuery and AJAX since we&rsquo;d been learning about how to use event listeners and asynchronous Javascript requests. I made a blogging app that can add and edit posts and comments on those posts using AJAX. Additionally, I tried to add in a few event listeners using jQuery, such as using a slideToggle function on showing the full text of a post or the add comment form.</p>
 
@@ -892,7 +903,7 @@ hash.q # must return NoMethodError</p>
   <entry>
     <title type="html"><![CDATA[Using Pry for More Efficient Debugging]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/13/giving-pry-a-try/"/>
-    <updated>2014-07-13T19:25:44-04:00</updated>
+    <updated>2014-07-13T16:25:44-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/13/giving-pry-a-try</id>
     <content type="html"><![CDATA[<p>We were in lecture here at the Flatiron School the other day, and Avi mentioned something called a REPL. He also mentioned that one of our favorite debugging tools, Pry, had a lot of cool functionality that we don&rsquo;t often exploit, so I decided to dig around a little bit and see what I could find.</p>
 
@@ -1240,7 +1251,7 @@ hash.q # must return NoMethodError</p>
   <entry>
     <title type="html"><![CDATA[Using APIs with Ruby]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/05/using-apis-with-ruby/"/>
-    <updated>2014-07-05T19:21:23-04:00</updated>
+    <updated>2014-07-05T16:21:23-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/05/using-apis-with-ruby</id>
     <content type="html"><![CDATA[<p>So everyone loves philosophical musings about beginning and learning, but I thought today’s post should be a little more technical. The topic &ndash; using API’s and getting data from other websites! This will be a two-part series &ndash; the first part will center around using API’s with Ruby and the second will be a surprise.</p>
 
@@ -1413,7 +1424,7 @@ The only way you’ll know what type of data you’ll get from an API is to read
   <entry>
     <title type="html"><![CDATA[The Eternal Whitebelt?]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/04/White%20Belt/"/>
-    <updated>2014-07-04T18:28:24-04:00</updated>
+    <updated>2014-07-04T15:28:24-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/04/White Belt</id>
     <content type="html"><![CDATA[<h3>Inspiration</h3>
 
@@ -1441,7 +1452,7 @@ The only way you’ll know what type of data you’ll get from an API is to read
   <entry>
     <title type="html"><![CDATA[An ActiveRecord Model of Jazz??]]></title>
     <link href="http://wlowry88.github.io/blog/2014/07/04/jazz-model/"/>
-    <updated>2014-07-04T17:13:09-04:00</updated>
+    <updated>2014-07-04T14:13:09-07:00</updated>
     <id>http://wlowry88.github.io/blog/2014/07/04/jazz-model</id>
     <content type="html"><![CDATA[<p>So we&rsquo;ve been learning about ActiveRecord here at Flatiron School, and how it&rsquo;s a really awesome ORM that makes things much easier for us in developing applications. I&rsquo;ve also known for a while that there is a connection between music theory and programming, especially with Python, and I wondered if there were a way to combine it with Ruby.</p>
 
