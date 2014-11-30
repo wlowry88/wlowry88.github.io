@@ -1,0 +1,137 @@
+---
+layout: post
+title: "Ruby Bits 1"
+date: 2014-11-29 16:23:47 -0800
+comments: true
+categories: codeschool ruby
+---
+Ruby Bits 1 was the first of the CodeSchool challenges that I tackled. This course is geared to take someone with decent experience in Ruby teach them how to do certain things "the Ruby way." 
+
+**Part 1: Expressions**
+This part went over the best practices for writing expressions in Ruby. It was mostly review, but there were a few bits of syntactic sugar that were good to review. It was interesting that at Flatiron School people were encouraged to use `if !_condition_` instead of the more Rubyist `unless`. 
+
+Of the patterns described, Memoization was probably the most useful. As a reminder, this refers to assignment of a variable _if assignment has not already taken place_. 
+
+```ruby
+x ||= 1
+x ||= 2
+x
+#=> 1 
+```
+
+**Part 2: Methods and Classes**
+This section covered optional arguments, raising exceptions, using begin/rescue/end, and attr_accessor vs. attr_writer vs. attr_reader. It was definitely good to review. [Ben Orenstein]('https://twitter.com/r00k') had a fantastic talk about refactoring at the Aloha Ruby Conf 2012, which you can see [here](https://www.youtube.com/watch?v=DC-pQPq0acs). In this talk, he describes how IN GENERAL, methods that require no parameters are probably a little better than methods that take one argument, and that methods that take 1 argument are probably a little better than methods that take 2 arguments, etc. Keeping the number of argument keeps 'coupling' lower, something we definitely want, as it often leads to higher cohesion (for more information on coupling in computer science, check out the [Wikipedia page](http://en.wikipedia.org/wiki/Coupling_%28computer_programming%29#Object-oriented_programming). 
+
+So how do we combat coupling? Let's say that you had an imaginary application where you had a band called the Ruby Rockers. And maybe there was a method called schedule_concert that took a few arguments, including the venue, show fee, time, and maybe longitude and latitude, which don't seem as mission critical.
+
+```ruby
+#Meh:
+def schedule_concert(venue, fee, time, longitude, latitude)
+  #...
+end
+#to call the method, you need to have the order memorized among other things and it's definitely annoying. Let's say you didn't remember the longitude and latitude and didn't really care about it either:
+play_concert('The Fillmore', 1.00, 2100, nil, nil)
+#=> Ok, your concert is scheduled.
+
+#Better kinda:
+def schedule_concert(venue, fee, time, longitude = nil, latitude = nil)
+  #...
+end
+play_concert('The Fillmore', 1.00, 2100)
+#=> Ok, your concert is scheduled, and in a slightly less coupled way!
+
+#Solid
+def schedule_concert(venue, fee, time, options = {})
+  #...
+end
+play_concert('The Fillmore', 1.00, 2100)
+#=> Sweet
+play_concert('The Fillmore', 1.00, 2100, latitude: 28.55, longitude: -81.33)
+#=> Cool
+```
+
+**Part 3: Classes**
+This was almost all review, but it did touch on something that is important - not being shy about private methods. It discusses the pros and cons of inheritance, the fact that Ruby has single inheritance, and how it's useful to make many smaller classes - for more information on classes check out [Practical Object-Oriented Design in Ruby](http://www.poodr.com/).
+
+
+**Part 4: Active Support**
+I hadn't really used ActiveSupport before this Code School class, and I'm kind of glad I didn't because it taught me the harder ways to do things. However, there are some really awesome extensions here that I didn't know about and that could probably make developing with Ruby [even] more of a joy! The [RailsGuides](http://guides.rubyonrails.org/active_support_core_extensions.html) do an incredible job with this.
+
+
+**Part 5: Modules**
+This is a very useful section and I would definitely recommend it highly to others. I didn't even know about the `ancestors` method, which for everyone who doesn't already know, is a method for any object that will return the object ancestor chain in an array. If anything it's a useful inspection device. Another useful one is the `included_modules` method, which returns the modules that are being included in your class. Both `included_modules` and `ancestors` can be useful.
+
+In general, it seems that modules are a better way of extending functionality into other classes unless there is a compelling logical case for inheritance; inheritance implies specialization, and because a class can only have one superclass, it must be pretty perfect to justify doing. One of the coolest patterns that I came across was the `self.included(base)` hook. To see it in action, take a look here:
+
+```ruby
+#module Badassify
+module Badassify
+  def self.included(base)
+    base.extend(ClassMethods)
+    base.make_everyone_more_badass #wow, we can hook into the moment of extension and then do stuff
+  end
+  module ClassMethods
+    def make_everyone_more_badass
+      #...
+    end
+  end
+end
+
+#class AverageJoe
+class AverageJoe
+  include Badassify
+  #extend Badassify::ClassMethods (this no longer necessary!)
+end
+``` 
+
+And you can do even cooler and prettier stuff with the ActiveSupport::Concern element of ActiveSupport, which can be found again at this [url](http://guides.rubyonrails.org/active_support_core_extensions.html).
+
+**Part 6: Blocks**
+This is actually very useful knowledge. It goes over everything from the way our favorite iterators work in Ruby (such as 'each', 'map', etc. that all take blocks), to the proper way to `yield` to a block. Also it describes how you can also yield objects to blocks just like regular arguments. This can allow for some pretty good refactorings, leading to DRYer code. Additionally, it talks about the Enumerator module (not to be confused with the Enumerable type), which allows access to many things (including those high level iterators!). Here's an example of a nice refactoring with a block:
+
+Let's say you have two methods, both which require you to do a lot of the same logic around signing in, logging errors, and signing out, like so:
+```ruby
+def update_status(user, status)
+  begin
+    sign_in(user)
+    post(status)
+  rescue ConnectionError => e
+    logger.error(e)
+  ensure
+    sign_out(user)
+  end
+end
+
+def upload_photo(user, photo)
+  begin
+    sign_in(user)
+    upload(photo)
+  rescue ConnectionError => e
+    logger.error(e)
+  ensure
+    sign_out(user)
+  end
+end
+``` 
+Given these two methods, it's easy to see that there is a lot of duplication. Why don't we just refactor so that we don't have to duplicate ANY OF IT!
+```ruby
+def sign_in_action_for(user)
+  sign_in(user)
+  yield
+  rescue ConnectionError => e
+    logger.error(e)
+  ensure
+    sign_out(user)
+end
+
+#Now, we can call the single method with blocks instead.
+sign_in_action_for("Will") do
+  post(status)
+end
+#of course we could do both within one block, but this allows for one at a time as well.
+sign_in_action_for("Will") do
+  upload(photo)
+end
+```
+
+Cool beans. Well the first part of Ruby Bits was quite interesting and I'm getting really hungry, so we'll see 'bout the advanced sequel, Ruby Bits 2.
