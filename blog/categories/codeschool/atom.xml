@@ -4,7 +4,7 @@
   <title><![CDATA[Category: codeschool | The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/blog/categories/codeschool/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-11-29T19:20:48-08:00</updated>
+  <updated>2014-11-29T19:21:56-08:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ruby Bits 1]]></title>
-    <link href="http://wlowry88.github.io/blog/2014/11/29/ruby-bits-1/"/>
-    <updated>2014-11-29T16:23:47-08:00</updated>
-    <id>http://wlowry88.github.io/blog/2014/11/29/ruby-bits-1</id>
+    <link href="http://wlowry88.github.io/blog/2014/10/07/ruby-bits-1/"/>
+    <updated>2014-10-07T17:23:47-07:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/10/07/ruby-bits-1</id>
     <content type="html"><![CDATA[<p>Ruby Bits 1 was the first of the CodeSchool challenges that I tackled. This course is geared to take someone with decent experience in Ruby teach them how to do certain things &ldquo;the Ruby way.&rdquo;</p>
 
 <p><strong>Part 1: Expressions</strong>
