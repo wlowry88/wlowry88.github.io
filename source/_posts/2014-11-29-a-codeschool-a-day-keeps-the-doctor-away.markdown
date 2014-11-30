@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A Codeschool [every other] 'Day [or so] Keeps the Doctor Away"
-date: 2014-11-29 16:11:44 -0800
+date: 2014-10-01 16:11:44 -0800
 comments: true
 categories: learning codeschool javascript ruby rails 
 ---
