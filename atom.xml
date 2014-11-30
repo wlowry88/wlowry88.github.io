@@ -4,7 +4,7 @@
   <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-11-29T16:22:06-08:00</updated>
+  <updated>2014-11-29T19:20:48-08:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -12,6 +12,231 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Bits 1]]></title>
+    <link href="http://wlowry88.github.io/blog/2014/11/29/ruby-bits-1/"/>
+    <updated>2014-11-29T16:23:47-08:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/11/29/ruby-bits-1</id>
+    <content type="html"><![CDATA[<p>Ruby Bits 1 was the first of the CodeSchool challenges that I tackled. This course is geared to take someone with decent experience in Ruby teach them how to do certain things &ldquo;the Ruby way.&rdquo;</p>
+
+<p><strong>Part 1: Expressions</strong>
+This part went over the best practices for writing expressions in Ruby. It was mostly review, but there were a few bits of syntactic sugar that were good to review. It was interesting that at Flatiron School people were encouraged to use <code>if !_condition_</code> instead of the more Rubyist <code>unless</code>.</p>
+
+<p>Of the patterns described, Memoization was probably the most useful. As a reminder, this refers to assignment of a variable <em>if assignment has not already taken place</em>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span> <span class="o">||=</span> <span class="mi">1</span>
+</span><span class='line'><span class="n">x</span> <span class="o">||=</span> <span class="mi">2</span>
+</span><span class='line'><span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; 1 </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Part 2: Methods and Classes</strong>
+This section covered optional arguments, raising exceptions, using begin/rescue/end, and attr_accessor vs. attr_writer vs. attr_reader. It was definitely good to review. <a href="" title="https://twitter.com/r00k">Ben Orenstein</a> had a fantastic talk about refactoring at the Aloha Ruby Conf 2012, which you can see <a href="https://www.youtube.com/watch?v=DC-pQPq0acs">here</a>. In this talk, he describes how IN GENERAL, methods that require no parameters are probably a little better than methods that take one argument, and that methods that take 1 argument are probably a little better than methods that take 2 arguments, etc. Keeping the number of argument keeps &lsquo;coupling&rsquo; lower, something we definitely want, as it often leads to higher cohesion (for more information on coupling in computer science, check out the <a href="http://en.wikipedia.org/wiki/Coupling_%28computer_programming%29#Object-oriented_programming">Wikipedia page</a>.</p>
+
+<p>So how do we combat coupling? Let&rsquo;s say that you had an imaginary application where you had a band called the Ruby Rockers. And maybe there was a method called schedule_concert that took a few arguments, including the venue, show fee, time, and maybe longitude and latitude, which don&rsquo;t seem as mission critical.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Meh:</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">schedule_concert</span><span class="p">(</span><span class="n">venue</span><span class="p">,</span> <span class="n">fee</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">#...</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#to call the method, you need to have the order memorized among other things and it&#39;s definitely annoying. Let&#39;s say you didn&#39;t remember the longitude and latitude and didn&#39;t really care about it either:</span>
+</span><span class='line'><span class="n">play_concert</span><span class="p">(</span><span class="s1">&#39;The Fillmore&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mo">00</span><span class="p">,</span> <span class="mi">2100</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; Ok, your concert is scheduled.</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#Better kinda:</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">schedule_concert</span><span class="p">(</span><span class="n">venue</span><span class="p">,</span> <span class="n">fee</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">longitude</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">,</span> <span class="n">latitude</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">#...</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">play_concert</span><span class="p">(</span><span class="s1">&#39;The Fillmore&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mo">00</span><span class="p">,</span> <span class="mi">2100</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; Ok, your concert is scheduled, and in a slightly less coupled way!</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#Solid</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">schedule_concert</span><span class="p">(</span><span class="n">venue</span><span class="p">,</span> <span class="n">fee</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+</span><span class='line'>  <span class="c1">#...</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">play_concert</span><span class="p">(</span><span class="s1">&#39;The Fillmore&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mo">00</span><span class="p">,</span> <span class="mi">2100</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; Sweet</span>
+</span><span class='line'><span class="n">play_concert</span><span class="p">(</span><span class="s1">&#39;The Fillmore&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mo">00</span><span class="p">,</span> <span class="mi">2100</span><span class="p">,</span> <span class="ss">latitude</span><span class="p">:</span> <span class="mi">28</span><span class="o">.</span><span class="mi">55</span><span class="p">,</span> <span class="ss">longitude</span><span class="p">:</span> <span class="o">-</span><span class="mi">81</span><span class="o">.</span><span class="mi">33</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; Cool</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Part 3: Classes</strong>
+This was almost all review, but it did touch on something that is important &ndash; not being shy about private methods. It discusses the pros and cons of inheritance, the fact that Ruby has single inheritance, and how it&rsquo;s useful to make many smaller classes &ndash; for more information on classes check out <a href="http://www.poodr.com/">Practical Object-Oriented Design in Ruby</a>.</p>
+
+<p><strong>Part 4: Active Support</strong>
+I hadn&rsquo;t really used ActiveSupport before this Code School class, and I&rsquo;m kind of glad I didn&rsquo;t because it taught me the harder ways to do things. However, there are some really awesome extensions here that I didn&rsquo;t know about and that could probably make developing with Ruby [even] more of a joy! The <a href="http://guides.rubyonrails.org/active_support_core_extensions.html">RailsGuides</a> do an incredible job with this.</p>
+
+<p><strong>Part 5: Modules</strong>
+This is a very useful section and I would definitely recommend it highly to others. I didn&rsquo;t even know about the <code>ancestors</code> method, which for everyone who doesn&rsquo;t already know, is a method for any object that will return the object ancestor chain in an array. If anything it&rsquo;s a useful inspection device. Another useful one is the <code>included_modules</code> method, which returns the modules that are being included in your class. Both <code>included_modules</code> and <code>ancestors</code> can be useful.</p>
+
+<p>In general, it seems that modules are a better way of extending functionality into other classes unless there is a compelling logical case for inheritance; inheritance implies specialization, and because a class can only have one superclass, it must be pretty perfect to justify doing. One of the coolest patterns that I came across was the <code>self.included(base)</code> hook. To see it in action, take a look here:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#module Badassify</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">Badassify</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">base</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="no">ClassMethods</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">base</span><span class="o">.</span><span class="n">make_everyone_more_badass</span> <span class="c1">#wow, we can hook into the moment of extension and then do stuff</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">ClassMethods</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">make_everyone_more_badass</span>
+</span><span class='line'>      <span class="c1">#...</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#class AverageJoe</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">AverageJoe</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">Badassify</span>
+</span><span class='line'>  <span class="c1">#extend Badassify::ClassMethods (this no longer necessary!)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>And you can do even cooler and prettier stuff with the ActiveSupport::Concern element of ActiveSupport, which can be found again at this <a href="http://guides.rubyonrails.org/active_support_core_extensions.html">url</a>.</p>
+
+<p><strong>Part 6: Blocks</strong>
+This is actually very useful knowledge. It goes over everything from the way our favorite iterators work in Ruby (such as &lsquo;each&rsquo;, &lsquo;map&rsquo;, etc. that all take blocks), to the proper way to <code>yield</code> to a block. Also it describes how you can also yield objects to blocks just like regular arguments. This can allow for some pretty good refactorings, leading to DRYer code. Additionally, it talks about the Enumerator module (not to be confused with the Enumerable type), which allows access to many things (including those high level iterators!). Here&rsquo;s an example of a nice refactoring with a block:</p>
+
+<p>Let&rsquo;s say you have two methods, both which require you to do a lot of the same logic around signing in, logging errors, and signing out, like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">update_status</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>    <span class="n">sign_in</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">post</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">rescue</span> <span class="no">ConnectionError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">ensure</span>
+</span><span class='line'>    <span class="n">sign_out</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">upload_photo</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">photo</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">begin</span>
+</span><span class='line'>    <span class="n">sign_in</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">upload</span><span class="p">(</span><span class="n">photo</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">rescue</span> <span class="no">ConnectionError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">ensure</span>
+</span><span class='line'>    <span class="n">sign_out</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+Given these two methods, it&rsquo;s easy to see that there is a lot of duplication. Why don&rsquo;t we just refactor so that we don&rsquo;t have to duplicate ANY OF IT!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">sign_in_action_for</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">sign_in</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">yield</span>
+</span><span class='line'>  <span class="k">rescue</span> <span class="no">ConnectionError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">ensure</span>
+</span><span class='line'>    <span class="n">sign_out</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#Now, we can call the single method with blocks instead.</span>
+</span><span class='line'><span class="n">sign_in_action_for</span><span class="p">(</span><span class="s2">&quot;Will&quot;</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">post</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#of course we could do both within one block, but this allows for one at a time as well.</span>
+</span><span class='line'><span class="n">sign_in_action_for</span><span class="p">(</span><span class="s2">&quot;Will&quot;</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">upload</span><span class="p">(</span><span class="n">photo</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Cool beans. Well the first part of Ruby Bits was quite interesting and I&rsquo;m getting really hungry, so we&rsquo;ll see &lsquo;bout the advanced sequel, Ruby Bits 2.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Codeschool [every other] 'Day [or so] Keeps the Doctor Away]]></title>
