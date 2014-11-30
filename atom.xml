@@ -4,7 +4,7 @@
   <title><![CDATA[The Eternal Whitebelt]]></title>
   <link href="http://wlowry88.github.io/atom.xml" rel="self"/>
   <link href="http://wlowry88.github.io/"/>
-  <updated>2014-11-29T16:20:43-08:00</updated>
+  <updated>2014-11-29T16:22:06-08:00</updated>
   <id>http://wlowry88.github.io/</id>
   <author>
     <name><![CDATA[Will Lowry]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Codeschool [every other] 'Day [or so] Keeps the Doctor Away]]></title>
-    <link href="http://wlowry88.github.io/blog/2014/11/29/a-codeschool-a-day-keeps-the-doctor-away/"/>
-    <updated>2014-11-29T16:11:44-08:00</updated>
-    <id>http://wlowry88.github.io/blog/2014/11/29/a-codeschool-a-day-keeps-the-doctor-away</id>
+    <link href="http://wlowry88.github.io/blog/2014/10/01/a-codeschool-a-day-keeps-the-doctor-away/"/>
+    <updated>2014-10-01T17:11:44-07:00</updated>
+    <id>http://wlowry88.github.io/blog/2014/10/01/a-codeschool-a-day-keeps-the-doctor-away</id>
     <content type="html"><![CDATA[<p>The title says it all. I&rsquo;m going to try and get through all of the Ruby, Rails, and Javascript code school tutorials in the next month. Why? Because it was &ldquo;free&rdquo; along with the Flatiron School tuition (definitely not free either) and I might as well get the most of it before it&rsquo;s taken away.</p>
 
 <p>Let&rsquo;s see how it goes &ndash; I think it can be done.</p>
