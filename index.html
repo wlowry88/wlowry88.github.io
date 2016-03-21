@@ -102,6 +102,62 @@ $(document).ready(
     <article class="post">
 	<h2 class="title">
 		
+		<a href="/blog/2016/03/21/%60x64-mingw%60-is-not-a-valid-platform/">
+		
+			`x64_mingw` Is Not a Valid Platform</a>
+	</h2>
+	<div class="entry-content">
+		<p>This is an annoying error, which I experienced while trying to set up a project in the beta Rails 5 (api mode). If you experience it, try seeing what bundler version you have:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle --version
+</span><span class='line'>#=&gt; outputs something like 1.7.7</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It could be that you need to update your version.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem update bundler</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That fixed it for me.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-03-21T07:38:40-07:00" pubdate data-updated="true">Mar 21<sup>st</sup>, 2016</time></div>
+	
+
+<div class="tags">
+
+	<a class='category' href='/blog/categories/bundle/'>bundle</a>, <a class='category' href='/blog/categories/bundler/'>bundler</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
+
+</div>
+
+
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
 		<a href="/blog/2016/03/19/http-requests/">
 		
 			Because the Internet Part 1: History and TCP/IP</a>
@@ -182,7 +238,7 @@ TCP stands for Transmission Control Protocol, and IP stands for Internet Protoco
 
 <div class="tags">
 
-	<a class='category' href='/blog/categories/http/'>http,</a>, <a class='category' href='/blog/categories/internet/'>internet,</a>, <a class='category' href='/blog/categories/ip/'>ip,</a>, <a class='category' href='/blog/categories/networks/'>networks</a>, <a class='category' href='/blog/categories/protocol/'>protocol,</a>, <a class='category' href='/blog/categories/tcp/'>tcp,</a>, <a class='category' href='/blog/categories/web/'>web,</a>
+	<a class='category' href='/blog/categories/http/'>http</a>, <a class='category' href='/blog/categories/internet/'>internet</a>, <a class='category' href='/blog/categories/ip/'>ip</a>, <a class='category' href='/blog/categories/networks/'>networks</a>, <a class='category' href='/blog/categories/protocol/'>protocol</a>, <a class='category' href='/blog/categories/tcp/'>tcp</a>, <a class='category' href='/blog/categories/web/'>web</a>
 
 </div>
 
@@ -734,47 +790,6 @@ Given these two methods, it&rsquo;s easy to see that there is a lot of duplicati
 
 
 <time datetime="2014-08-02T20:06:27-07:00" pubdate data-updated="true">Aug 2<sup>nd</sup>, 2014</time></div>
-	
-
-
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/07/28/pros-and-cons-of-turbolinks-in-rails-4-applications/">
-		
-			Pros and Cons of Turbolinks in Rails 4 Applications</a>
-	</h2>
-	<div class="entry-content">
-		<p>Recently, I was playing around with jQuery and AJAX since we&rsquo;d been learning about how to use event listeners and asynchronous Javascript requests. I made a blogging app that can add and edit posts and comments on those posts using AJAX. Additionally, I tried to add in a few event listeners using jQuery, such as using a slideToggle function on showing the full text of a post or the add comment form.</p>
-
-<p>Everything was going great; refreshing the posts index page yielded all my nice front-end effects. Until I tried linking to it.</p>
-
-<p>THEN EVERYTHING BROKE.</p>
-
-
-		
-		<a href="/blog/2014/07/28/pros-and-cons-of-turbolinks-in-rails-4-applications/" class="more-link">Read on &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-28T19:02:31-07:00" pubdate data-updated="true">Jul 28<sup>th</sup>, 2014</time></div>
 	
 
 

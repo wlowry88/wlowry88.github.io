@@ -5,11 +5,11 @@
 	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
 	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<meta charset="utf-8">
-	<title>Category: tcp  | The Eternal Whitebelt</title>
+	<title>`x64_mingw` is not a valid platform  | The Eternal Whitebelt</title>
 
 <meta name="author" content="Will Lowry"> 
 
-<meta name="description" content="Category: tcp"> <meta name="keywords" content="">
+<meta name="description" content="Flatiron School, Developer, Ruby, Rails"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -96,30 +96,64 @@ $(document).ready(
 
 </header>
 
-	<div id="content" class="inner">
-	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">`x64_mingw` Is Not a Valid Platform</h2>
+	<div class="entry-content"><p>This is an annoying error, which I experienced while trying to set up a project in the beta Rails 5 (api mode). If you experience it, try seeing what bundler version you have:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle --version
+</span><span class='line'>#=&gt; outputs something like 1.7.7</span></code></pre></td></tr></table></div></figure>
 
 
-	
-	
-	<section class="archives"><h1 class="year">2016</h1>
+<p>It could be that you need to update your version.</p>
 
-<article>
-	<h2 class="title"><a href="/blog/2016/03/19/http-requests/">Because the Internet Part 1: History and TCP/IP</a></h2>
-	<div class="meta">
-		<div class="date">Mar 19</div>
-		
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem update bundler</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That fixed it for me.</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-03-21T07:38:40-07:00" pubdate data-updated="true">Mar 21<sup>st</sup>, 2016</time></div>
+	
 
 <div class="tags">
 
-	<a class='category' href='/blog/categories/http/'>http</a>, <a class='category' href='/blog/categories/internet/'>internet</a>, <a class='category' href='/blog/categories/ip/'>ip</a>, <a class='category' href='/blog/categories/networks/'>networks</a>, <a class='category' href='/blog/categories/protocol/'>protocol</a>, <a class='category' href='/blog/categories/tcp/'>tcp</a>, <a class='category' href='/blog/categories/web/'>web</a>
+	<a class='category' href='/blog/categories/bundle/'>bundle</a>, <a class='category' href='/blog/categories/bundler/'>bundler</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
 
 </div>
 
 
-	    
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+<!---	<a class="addthis_counter addthis_pill_style"></a> --->
 	</div>
-</article>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
 
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2016
